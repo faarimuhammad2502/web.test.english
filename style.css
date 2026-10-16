@@ -1,9 +1,15 @@
 body { font-family: 'Plus Jakarta Sans', sans-serif; }
-::-webkit-scrollbar { width: 6px; height: 6px; }
+.font-serif { font-family: 'Lora', serif; }
+.font-sans { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+/* Elegant minimal scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
-.dark ::-webkit-scrollbar-thumb { background: #334155; }
-.backdrop-blur-md { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-.backdrop-blur-sm { backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
-#welcome-screen, #quiz-screen, #result-screen { animation: fadeIn 0.35s ease-out forwards; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+::-webkit-scrollbar-thumb { background: #e4e4e7; border-radius: 2px; }
+.dark ::-webkit-scrollbar-thumb { background: #27272a; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Animations */
+#welcome-screen, #quiz-screen, #result-screen { animation: fadeIn 0.5s ease-out forwards; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }

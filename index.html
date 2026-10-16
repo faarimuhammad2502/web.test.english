@@ -3,224 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduTest Pro</title>
+    <title>EduTest Pro | Assessment</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
-            theme: { extend: { colors: { brand: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 800: '#1e40af', 900: '#1e3a8a'} } } }
+            theme: { 
+                extend: { 
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Lora"', 'serif'],
+                    }
+                } 
+            }
         }
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
-<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans min-h-screen flex flex-col transition-colors duration-300">
+<body class="bg-[#fcfcfc] dark:bg-zinc-950 text-zinc-800 dark:text-zinc-200 font-sans min-h-screen flex flex-col selection:bg-zinc-900 selection:text-white dark:selection:bg-zinc-100 dark:selection:text-zinc-900 transition-colors duration-500">
 
-    <!-- Header / Navbar -->
-    <header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50 transition-colors duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
+    <!-- Navbar -->
+    <header class="bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800/60 sticky top-0 z-50 transition-colors duration-500">
+        <div class="max-w-6xl mx-auto px-6 sm:px-8">
+            <div class="flex items-center justify-between h-20">
                 <!-- Logo -->
-                <div class="flex items-center gap-3 cursor-pointer group" id="logo-nav" onclick="resetApp()">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:shadow-blue-500/40 transition-shadow">
-                        <i class="fas fa-graduation-cap text-xl"></i>
+                <div class="flex items-center gap-4 cursor-pointer group" id="logo-nav" onclick="resetApp()">
+                    <div class="w-8 h-8 rounded bg-zinc-900 dark:bg-zinc-100 flex items-center justify-center text-white dark:text-zinc-900 transition-transform duration-500 group-hover:scale-105">
+                        <i class="fas fa-landmark text-sm"></i>
                     </div>
                     <div>
-                        <span class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">EduTest Pro</span>
+                        <span class="font-serif font-bold text-xl tracking-tight text-zinc-900 dark:text-zinc-100">EduTest Pro.</span>
                     </div>
                 </div>
 
-                <!-- Right Utility Bar -->
-                <div class="flex items-center gap-3" id="utility-nav">
-                    <button id="lang-toggle-btn" onclick="toggleLanguage()" class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100/80 dark:bg-slate-800/80 text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition shadow-sm">
-                        <i class="fas fa-globe text-blue-500"></i>
-                        <span id="lang-label">ID | EN</span>
+                <!-- Utilities -->
+                <div class="flex items-center gap-4" id="utility-nav">
+                    <button id="lang-toggle-btn" onclick="toggleLanguage()" class="text-xs font-semibold tracking-widest uppercase text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors flex items-center gap-2">
+                        <span id="lang-label">ID-EN</span>
                     </button>
-                    <button id="dark-toggle-btn" onclick="toggleDarkMode()" class="w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100/80 dark:bg-slate-800/80 flex items-center justify-center text-slate-700 dark:text-amber-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition shadow-sm">
-                        <i id="dark-icon" class="fas fa-moon"></i>
+                    <div class="w-px h-4 bg-zinc-300 dark:bg-zinc-700"></div>
+                    <button id="dark-toggle-btn" onclick="toggleDarkMode()" class="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+                        <i id="dark-icon" class="fas fa-moon text-sm"></i>
                     </button>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Container -->
-    <main class="flex-grow container mx-auto px-4 py-8 max-w-5xl">
-        <div class="text-center mb-8" id="main-header">
-            <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3" data-i18n="heroTitle">
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 sm:px-6 py-12 max-w-4xl">
+        
+        <!-- Header Section -->
+        <div class="text-center mb-12" id="main-header">
+            <span class="text-xs font-bold tracking-widest uppercase text-zinc-400 dark:text-zinc-500 mb-4 block" data-i18n="heroPre">Official Assessment Platform</span>
+            <h1 class="text-4xl sm:text-5xl font-serif font-medium text-zinc-900 dark:text-zinc-50 tracking-tight mb-6 leading-tight" data-i18n="heroTitle">
                 Ujian Standar Internasional
             </h1>
-            <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto" data-i18n="heroSubtitle">
+            <p class="text-base text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed" data-i18n="heroSubtitle">
                 Evaluasi & tingkatkan skor kemampuan Bahasa Inggris Anda dengan format, waktu, dan kisi-kisi soal yang otentik.
             </p>
         </div>
 
-        <div class="flex justify-center mb-8 border-b border-slate-200 dark:border-slate-800 overflow-x-auto" id="tabs-nav">
-            <button onclick="switchTab('cefr')" id="tab-cefr" class="tab-btn flex items-center gap-2 px-5 py-3 font-semibold text-sm border-b-2 border-transparent text-slate-500 dark:text-slate-400 hover:text-blue-600 whitespace-nowrap transition">
-                <i class="fas fa-layer-group"></i> CEFR Level Test
-            </button>
-            <button onclick="switchTab('toefl')" id="tab-toefl" class="tab-btn flex items-center gap-2 px-5 py-3 font-semibold text-sm border-b-2 border-blue-600 text-blue-600 dark:text-blue-400 whitespace-nowrap transition">
-                <i class="fas fa-globe-americas"></i> TOEFL iBT
-            </button>
-            <button onclick="switchTab('ielts')" id="tab-ielts" class="tab-btn flex items-center gap-2 px-5 py-3 font-semibold text-sm border-b-2 border-transparent text-slate-500 dark:text-slate-400 hover:text-blue-600 whitespace-nowrap transition">
-                <i class="fas fa-globe-europe"></i> IELTS Academic
-            </button>
+        <!-- Elegant Tabs -->
+        <div class="flex justify-center mb-10 overflow-x-auto hide-scrollbar" id="tabs-nav">
+            <div class="inline-flex gap-8 border-b border-zinc-200 dark:border-zinc-800">
+                <button onclick="switchTab('cefr')" id="tab-cefr" class="tab-btn pb-4 text-sm font-medium border-b-2 border-transparent text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 whitespace-nowrap transition-all">
+                    CEFR Level Test
+                </button>
+                <button onclick="switchTab('toefl')" id="tab-toefl" class="tab-btn pb-4 text-sm font-medium border-b-2 border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100 whitespace-nowrap transition-all">
+                    TOEFL iBT Format
+                </button>
+                <button onclick="switchTab('ielts')" id="tab-ielts" class="tab-btn pb-4 text-sm font-medium border-b-2 border-transparent text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 whitespace-nowrap transition-all">
+                    IELTS Academic
+                </button>
+            </div>
         </div>
 
-        <!-- Confirm Modal -->
-        <div id="confirm-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4">
-            <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-700 transform scale-95 transition-transform duration-300" id="confirm-modal-box">
+        <!-- Confirm Modal (Strict Mode) -->
+        <div id="confirm-modal" class="fixed inset-0 bg-zinc-900/40 dark:bg-black/60 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4 transition-opacity">
+            <div class="bg-white dark:bg-zinc-900 max-w-md w-full p-8 shadow-2xl border border-zinc-200 dark:border-zinc-800 transform scale-95 transition-transform duration-300" id="confirm-modal-box">
                 <div class="text-center">
-                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600 dark:text-blue-400">
-                        <i class="fas fa-shield-alt text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2" data-i18n="confirmTitle">Konfirmasi Ujian</h3>
-                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-6" data-i18n="confirmDesc">Apakah Anda yakin sudah siap memulai ujian ini? Setelah dimulai, ujian tidak dapat dibatalkan, dijeda, atau ditutup hingga Anda menyelesaikannya.</p>
-                    <div class="flex gap-3">
-                        <button onclick="closeConfirmModal()" class="flex-1 px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold text-sm transition" data-i18n="cancelBtn">Batal</button>
-                        <button onclick="startTestConfirmed()" class="flex-1 px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm transition shadow-lg shadow-blue-500/30" data-i18n="confirmBtn">Ya, Mulai Ujian</button>
+                    <i class="fas fa-lock text-3xl text-zinc-800 dark:text-zinc-200 mb-6"></i>
+                    <h3 class="text-2xl font-serif font-medium text-zinc-900 dark:text-white mb-3" data-i18n="confirmTitle">Konfirmasi Ujian</h3>
+                    <p class="text-sm text-zinc-600 dark:text-zinc-400 mb-8 leading-relaxed" data-i18n="confirmDesc">Ujian ini bersifat tertutup (strict). Setelah dimulai, ujian tidak dapat dibatalkan, dijeda, atau ditutup hingga Anda menyelesaikannya secara penuh.</p>
+                    <div class="flex flex-col-reverse sm:flex-row gap-3">
+                        <button onclick="closeConfirmModal()" class="flex-1 px-5 py-3 border border-zinc-200 dark:border-zinc-700 bg-transparent hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300 font-medium text-sm transition-colors" data-i18n="cancelBtn">Batal</button>
+                        <button onclick="startTestConfirmed()" class="flex-1 px-5 py-3 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-black dark:hover:bg-white font-medium text-sm transition-colors" data-i18n="confirmBtn">Mulai Ujian</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="test-container" class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 border border-slate-200/80 dark:border-slate-800 p-6 sm:p-8 transition-colors duration-300">
-            <div id="welcome-screen" class="text-center py-4">
-                <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-800/50 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-slate-700 mb-6 shadow-inner">
-                    <i id="test-icon" class="fas fa-globe-americas text-3xl"></i>
+        <!-- Main Card Area -->
+        <div id="test-container" class="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800/80 p-8 sm:p-12 shadow-sm transition-colors duration-500">
+            
+            <!-- SCREEN 1: Welcome -->
+            <div id="welcome-screen" class="text-center py-6">
+                <div class="mb-8">
+                    <i id="test-icon" class="fas fa-globe-americas text-4xl text-zinc-800 dark:text-zinc-200 opacity-80"></i>
                 </div>
-                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-4" id="test-title">TOEFL iBT</h2>
-                <div class="flex flex-wrap justify-center gap-3 sm:gap-4 mb-6">
-                    <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold border border-slate-200 dark:border-slate-700">
-                        <i class="fas fa-list-ol text-blue-500"></i> <span id="test-total-q">0</span> <span data-i18n="questionsCount">Soal</span>
-                    </span>
-                    <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold border border-slate-200 dark:border-slate-700">
-                        <i class="far fa-clock text-blue-500"></i> <span id="test-time-limit">0</span> <span data-i18n="minutesCount">Menit</span>
-                    </span>
-                </div>
-                <div class="text-left bg-gradient-to-br from-slate-50 to-blue-50/30 dark:from-slate-800/50 dark:to-slate-900/50 p-5 sm:p-6 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-6" id="test-desc"></div>
-                <div class="text-left bg-amber-50 dark:bg-amber-950/40 border-l-4 border-amber-500 p-4 rounded-r-xl mb-8">
-                    <div class="flex items-start gap-3">
-                        <i class="fas fa-triangle-exclamation text-amber-600 dark:text-amber-400 text-lg mt-0.5"></i>
-                        <p class="text-xs sm:text-sm text-amber-800 dark:text-amber-200 font-medium leading-relaxed" data-i18n="testNotice">
-                            Perhatian: Ujian bersifat strict. Anda tidak bisa keluar dari halaman ini sebelum ujian selesai.
-                        </p>
+                <h2 class="text-3xl sm:text-4xl font-serif font-medium text-zinc-900 dark:text-white mb-6" id="test-title">TOEFL iBT</h2>
+                
+                <div class="flex flex-wrap justify-center gap-6 mb-8">
+                    <div class="flex flex-col items-center">
+                        <span class="text-2xl font-light text-zinc-900 dark:text-zinc-100" id="test-total-q">0</span>
+                        <span class="text-xs font-bold tracking-widest uppercase text-zinc-400" data-i18n="questionsCount">Soal</span>
+                    </div>
+                    <div class="w-px bg-zinc-200 dark:bg-zinc-800"></div>
+                    <div class="flex flex-col items-center">
+                        <span class="text-2xl font-light text-zinc-900 dark:text-zinc-100" id="test-time-limit">0</span>
+                        <span class="text-xs font-bold tracking-widest uppercase text-zinc-400" data-i18n="minutesCount">Menit</span>
                     </div>
                 </div>
-                <button onclick="openConfirmModal()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-4 px-10 rounded-xl transition duration-300 shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/35 transform hover:-translate-y-0.5 flex items-center justify-center mx-auto gap-3 text-base sm:text-lg">
-                    <span data-i18n="startBtn">Mulai Ujian</span> <i class="fas fa-arrow-right"></i>
+
+                <div class="text-left bg-zinc-50 dark:bg-zinc-900/50 p-6 sm:p-8 border border-zinc-100 dark:border-zinc-800 text-zinc-600 dark:text-zinc-300 text-sm leading-relaxed mb-8 font-serif" id="test-desc"></div>
+                
+                <div class="text-left border-l-2 border-zinc-400 dark:border-zinc-500 pl-4 mb-10">
+                    <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium tracking-wide uppercase" data-i18n="testNotice">
+                        Mode Ujian Ketat Diaktifkan. Jangan tutup halaman saat ujian berlangsung.
+                    </p>
+                </div>
+                
+                <button onclick="openConfirmModal()" class="bg-zinc-900 dark:bg-zinc-100 hover:bg-black dark:hover:bg-white text-white dark:text-zinc-900 font-medium py-4 px-12 transition-all duration-300 flex items-center justify-center mx-auto gap-3 text-sm tracking-wider uppercase">
+                    <span data-i18n="startBtn">Mulai Ujian</span> <i class="fas fa-arrow-right text-xs"></i>
                 </button>
             </div>
 
+            <!-- SCREEN 2: Quiz -->
             <div id="quiz-screen" class="hidden">
-                <div class="flex flex-col sm:flex-row justify-between items-center pb-4 mb-6 border-b border-slate-200 dark:border-slate-800 gap-3">
-                    <div class="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-between sm:justify-start">
-                        <span id="section-badge" class="text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">READING</span>
-                        <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">
-                            <span data-i18n="question">Soal</span> <span id="current-q" class="font-bold text-slate-800 dark:text-white">1</span> / <span id="total-q">10</span>
+                <!-- Quiz Header -->
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-6 mb-8 border-b border-zinc-200 dark:border-zinc-800 gap-4">
+                    <div>
+                        <span id="section-badge" class="text-xs font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400 block mb-1">READING</span>
+                        <span class="text-sm font-serif text-zinc-900 dark:text-zinc-100">
+                            <span data-i18n="question">Question</span> <span id="current-q" class="font-medium">1</span> of <span id="total-q">10</span>
                         </span>
                     </div>
-                    <div class="flex items-center gap-3 w-full sm:w-auto justify-between">
-                        <button onclick="toggleGridPalette()" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition flex items-center gap-1.5">
-                            <i class="fas fa-th"></i> <span data-i18n="gridBtn">Peta Soal</span>
+                    <div class="flex items-center gap-4 w-full sm:w-auto justify-between border-t border-zinc-100 dark:border-zinc-800 sm:border-0 pt-4 sm:pt-0">
+                        <button onclick="toggleGridPalette()" class="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 text-xs font-bold tracking-widest uppercase transition-colors flex items-center gap-2">
+                            <i class="fas fa-th-large"></i> <span data-i18n="gridBtn">Navigasi</span>
                         </button>
-                        <div class="flex items-center gap-2 px-4 py-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-sm font-mono font-bold">
-                            <i class="far fa-clock"></i> <span id="timer">00:00:00</span>
+                        <div class="flex items-center gap-2 text-zinc-900 dark:text-zinc-100 font-mono text-base tracking-wider">
+                            <i class="far fa-clock text-zinc-400"></i> <span id="timer">00:00:00</span>
                         </div>
                     </div>
                 </div>
 
-                <div id="grid-palette" class="hidden mb-6 p-4 bg-slate-50 dark:bg-slate-800/80 rounded-xl border border-slate-200 dark:border-slate-700 max-h-60 overflow-y-auto">
-                    <div class="flex items-center justify-between mb-3 sticky top-0 bg-slate-50 dark:bg-slate-800 pb-2 border-b border-slate-200 dark:border-slate-700">
-                        <span class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider" data-i18n="questionPalette">Navigasi Soal</span>
-                        <button onclick="toggleGridPalette()" class="text-slate-400 hover:text-slate-600 text-xs"><i class="fas fa-times"></i> Tutup</button>
+                <!-- Grid Palette -->
+                <div id="grid-palette" class="hidden mb-8 p-6 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 max-h-64 overflow-y-auto">
+                    <div class="flex items-center justify-between mb-4 pb-3 border-b border-zinc-200 dark:border-zinc-800">
+                        <span class="text-xs font-bold tracking-widest uppercase text-zinc-500" data-i18n="questionPalette">Peta Soal</span>
+                        <button onclick="toggleGridPalette()" class="text-zinc-400 hover:text-zinc-900 text-xs uppercase tracking-wider font-bold"><i class="fas fa-times"></i> Tutup</button>
                     </div>
-                    <div id="grid-buttons-container" class="grid grid-cols-5 sm:grid-cols-10 gap-2"></div>
+                    <div id="grid-buttons-container" class="grid grid-cols-6 sm:grid-cols-12 gap-2"></div>
                 </div>
 
-                <div id="audio-container" class="hidden mb-6 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-850 p-5 rounded-2xl border border-blue-100 dark:border-slate-700 shadow-sm">
-                    <div class="flex items-center justify-between mb-3">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-sm">
-                                <i class="fas fa-headphones"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-900 dark:text-white text-sm" data-i18n="listeningAudio">Listening Audio Section</h4>
-                                <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="audioInstruct">Dengarkan klip suara Bahasa Inggris di bawah ini dengan seksama.</p>
-                            </div>
+                <!-- Audio Section -->
+                <div id="audio-container" class="hidden mb-8 bg-zinc-50 dark:bg-zinc-900/50 p-6 sm:p-8 border border-zinc-200 dark:border-zinc-800">
+                    <div class="flex items-center gap-4 mb-6 pb-4 border-b border-zinc-200 dark:border-zinc-800/50">
+                        <i class="fas fa-headphones-alt text-2xl text-zinc-400"></i>
+                        <div>
+                            <h4 class="font-serif font-medium text-zinc-900 dark:text-white text-lg" data-i18n="listeningAudio">Listening Section</h4>
+                            <p class="text-xs tracking-wide uppercase text-zinc-500 mt-1" data-i18n="audioInstruct">Dengarkan klip suara berikut</p>
                         </div>
                     </div>
-                    <div class="flex flex-wrap items-center gap-3 bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
-                        <button id="play-audio-btn" onclick="playQuestionSpeech()" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-2 shadow transition">
+                    <div class="flex flex-wrap items-center gap-3 mb-4">
+                        <button id="play-audio-btn" onclick="playQuestionSpeech()" class="px-5 py-2.5 bg-zinc-900 hover:bg-black dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-2">
                             <i id="play-audio-icon" class="fas fa-play"></i> <span id="play-audio-label">Putar Audio</span>
                         </button>
-                        <button onclick="stopQuestionSpeech()" class="px-3 py-2 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-300 transition">
+                        <button onclick="stopQuestionSpeech()" class="px-4 py-2.5 border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-xs transition-colors">
                             <i class="fas fa-stop"></i>
                         </button>
                     </div>
-                    <details class="mt-3 text-xs text-slate-600 dark:text-slate-400">
-                        <summary class="cursor-pointer font-semibold hover:text-blue-600 transition" data-i18n="showTranscript">Tampilkan Transkrip Teks</summary>
-                        <div id="audio-transcript-text" class="mt-2 p-4 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 font-serif leading-relaxed text-sm"></div>
+                    <details class="group">
+                        <summary class="cursor-pointer text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors list-none flex items-center gap-2">
+                            <i class="fas fa-chevron-down group-open:rotate-180 transition-transform"></i> <span data-i18n="showTranscript">Transkrip Teks</span>
+                        </summary>
+                        <div id="audio-transcript-text" class="mt-4 p-5 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 font-serif leading-relaxed text-sm text-zinc-700 dark:text-zinc-300"></div>
                     </details>
                 </div>
 
-                <div id="reading-container" class="hidden mb-6 bg-slate-50 dark:bg-slate-800/60 p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-700 max-h-80 overflow-y-auto">
-                    <h3 class="font-bold text-slate-900 dark:text-white text-base mb-3 flex items-center gap-2" id="passage-title">
-                        <i class="fas fa-book-open text-blue-500"></i> Reading Passage
+                <!-- Reading Section -->
+                <div id="reading-container" class="hidden mb-10 bg-zinc-50 dark:bg-zinc-900/40 p-6 sm:p-10 border border-zinc-200 dark:border-zinc-800 max-h-96 overflow-y-auto custom-scroll">
+                    <h3 class="font-serif font-medium text-xl sm:text-2xl text-zinc-900 dark:text-white mb-6 pb-4 border-b border-zinc-200 dark:border-zinc-800" id="passage-title">
+                        Reading Passage
                     </h3>
-                    <div id="passage-text" class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed space-y-3"></div>
+                    <div id="passage-text" class="font-serif text-zinc-700 dark:text-zinc-300 text-base leading-loose space-y-4"></div>
                 </div>
 
-                <div class="min-h-[220px]">
-                    <div class="flex items-start gap-3 mb-6">
-                        <span id="q-number-badge" class="bg-blue-600 text-white font-bold h-7 w-7 rounded-lg text-sm flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">1</span>
-                        <h3 id="question-text" class="text-base sm:text-lg font-semibold text-slate-900 dark:text-white leading-relaxed">Loading question...</h3>
+                <!-- Question Area -->
+                <div class="min-h-[200px]">
+                    <div class="mb-8">
+                        <h3 id="question-text" class="text-xl sm:text-2xl font-serif text-zinc-900 dark:text-white leading-snug">Loading question...</h3>
                     </div>
-                    <div id="options-container" class="space-y-3 sm:pl-10"></div>
+                    <div id="options-container" class="space-y-1"></div>
                 </div>
 
-                <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center">
-                    <button id="prev-btn" onclick="prevQuestion()" class="px-5 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold text-sm transition flex items-center gap-2 shadow-sm">
-                        <i class="fas fa-chevron-left"></i> <span data-i18n="prevBtn">Sebelumnya</span>
+                <!-- Footer Nav -->
+                <div class="mt-12 pt-8 border-t border-zinc-200 dark:border-zinc-800 flex justify-between items-center">
+                    <button id="prev-btn" onclick="prevQuestion()" class="px-6 py-3 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-900 text-zinc-600 dark:text-zinc-300 text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-3">
+                        <i class="fas fa-arrow-left text-xs"></i> <span data-i18n="prevBtn">Kembali</span>
                     </button>
                     <div class="ml-auto">
-                        <button id="next-btn" onclick="nextQuestion()" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm transition shadow-md flex items-center gap-2">
-                            <span data-i18n="nextBtn">Selanjutnya</span> <i class="fas fa-chevron-right"></i>
+                        <button id="next-btn" onclick="nextQuestion()" class="px-8 py-3 bg-zinc-900 hover:bg-black dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-3">
+                            <span data-i18n="nextBtn">Lanjut</span> <i class="fas fa-arrow-right text-xs"></i>
                         </button>
-                        <button id="submit-btn" onclick="finishTest()" class="hidden px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm transition shadow-md flex items-center gap-2">
-                            <span data-i18n="finishBtn">Selesaikan Ujian</span> <i class="fas fa-check-circle"></i>
+                        <button id="submit-btn" onclick="finishTest()" class="hidden px-8 py-3 bg-zinc-900 hover:bg-black dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-3">
+                            <span data-i18n="finishBtn">Selesai</span> <i class="fas fa-check text-xs"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- SCREEN 3: Result -->
-            <div id="result-screen" class="hidden">
-                <div class="text-center mb-8">
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mb-1" data-i18n="resultTitle">Hasil Laporan Ujian</h2>
+            <div id="result-screen" class="hidden text-center py-10">
+                <div class="mb-10">
+                    <i class="fas fa-award text-4xl text-zinc-300 dark:text-zinc-600 mb-6 block"></i>
+                    <h2 class="text-3xl sm:text-4xl font-serif font-medium text-zinc-900 dark:text-white mb-2" data-i18n="resultTitle">Official Test Report</h2>
                 </div>
-                <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-6 text-center text-white shadow-xl mb-10">
-                    <span class="text-xs font-bold uppercase tracking-widest text-blue-200 mb-2 block" data-i18n="overallEval">Evaluasi</span>
-                    <div class="text-4xl sm:text-5xl font-black mb-3" id="final-score-main">Finished</div>
-                    <p class="text-xs sm:text-sm text-blue-100 max-w-xl mx-auto leading-relaxed" id="score-description"></p>
+                
+                <div class="border border-zinc-200 dark:border-zinc-800 p-10 mb-12 bg-zinc-50 dark:bg-zinc-900/50">
+                    <span class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-4 block" data-i18n="overallEval">Assessment Score</span>
+                    <div class="text-5xl sm:text-6xl font-serif font-medium text-zinc-900 dark:text-white mb-6" id="final-score-main">Finished</div>
+                    <div class="w-12 h-px bg-zinc-300 dark:bg-zinc-700 mx-auto mb-6"></div>
+                    <p class="text-sm text-zinc-600 dark:text-zinc-400 max-w-md mx-auto leading-relaxed font-serif" id="score-description"></p>
                 </div>
-                <div class="text-center pt-6 border-t border-slate-200 dark:border-slate-800">
-                    <button onclick="resetApp()" class="px-8 py-3 rounded-xl bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-bold text-sm hover:opacity-90 transition" data-i18n="backBtn">
-                        <i class="fas fa-home"></i> Kembali ke Beranda
-                    </button>
-                </div>
+                
+                <button onclick="resetApp()" class="px-8 py-4 border border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-900 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-zinc-900 text-xs font-bold uppercase tracking-widest transition-colors" data-i18n="backBtn">
+                    Kembali ke Beranda
+                </button>
             </div>
         </div>
     </main>
 
-    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 mt-auto transition-colors duration-300">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-xs font-semibold text-slate-600 dark:text-slate-400">&copy; 2026 EduTest Pro Assessment. Strict Test Edition.</p>
-        </div>
+    <footer class="py-8 mt-auto text-center transition-colors duration-500">
+        <p class="text-xs font-medium tracking-widest uppercase text-zinc-400 dark:text-zinc-600 font-serif">&copy; 2026 EduTest Pro Assessment. Elegant Edition.</p>
     </footer>
 
     <script src="test-data.js"></script>
