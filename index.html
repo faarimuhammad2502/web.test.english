@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduTest Pro - Platform Ujian Bahasa Inggris</title>
+    <title>EduTest Pro - Simulasi Ujian Bahasa Inggris</title>
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for Icons -->
@@ -15,7 +15,7 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
     <!-- Navbar -->
-    <nav class="bg-blue-600 text-white shadow-lg">
+    <nav class="bg-blue-600 text-white shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center gap-3">
@@ -23,7 +23,7 @@
                     <span class="font-bold text-xl tracking-tight">EduTest Pro</span>
                 </div>
                 <div class="hidden md:block">
-                    <span class="text-blue-100 text-sm">International Standard Assessment</span>
+                    <span class="text-blue-100 text-sm font-medium">Advanced English Simulation Platform</span>
                 </div>
             </div>
         </div>
@@ -32,89 +32,194 @@
     <!-- Main Content -->
     <main class="flex-grow container mx-auto px-4 py-8 max-w-5xl">
         <!-- Header -->
-        <div class="text-center mb-10">
-            <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Platform Ujian Bahasa Inggris</h1>
-            <p class="text-lg text-slate-600">Evaluasi kemampuan bahasa Inggris Anda secara mandiri dengan standar internasional.</p>
+        <div class="text-center mb-10" id="main-header">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Simulasi Ujian Standar Internasional</h1>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto">Persiapkan diri Anda untuk sertifikasi resmi dengan simulasi komprehensif, standar waktu, dan format soal yang otentik.</p>
         </div>
 
         <!-- Tabs Navigation -->
-        <div class="flex justify-center mb-8 border-b border-slate-200">
-            <button onclick="switchTab('general')" id="tab-general" class="tab-btn px-4 py-3 sm:px-6 text-blue-600 font-semibold border-b-2 border-blue-600 focus:outline-none transition-colors">General Test</button>
-            <button onclick="switchTab('toefl')" id="tab-toefl" class="tab-btn px-4 py-3 sm:px-6 text-slate-500 hover:text-blue-600 font-semibold focus:outline-none transition-colors">TOEFL Practice</button>
-            <button onclick="switchTab('ielts')" id="tab-ielts" class="tab-btn px-4 py-3 sm:px-6 text-slate-500 hover:text-blue-600 font-semibold focus:outline-none transition-colors">IELTS Practice</button>
+        <div class="flex justify-center mb-8 border-b border-slate-200" id="tabs-nav">
+            <button onclick="switchTab('cefr')" id="tab-cefr" class="tab-btn px-4 py-3 sm:px-6 text-blue-600 font-semibold border-b-2 border-blue-600 focus:outline-none transition-colors">
+                <i class="fas fa-layer-group mr-2"></i> CEFR Level Test
+            </button>
+            <button onclick="switchTab('toefl')" id="tab-toefl" class="tab-btn px-4 py-3 sm:px-6 text-slate-500 hover:text-blue-600 font-semibold focus:outline-none transition-colors">
+                <i class="fas fa-globe-americas mr-2"></i> TOEFL iBT Simulasi
+            </button>
+            <button onclick="switchTab('ielts')" id="tab-ielts" class="tab-btn px-4 py-3 sm:px-6 text-slate-500 hover:text-blue-600 font-semibold focus:outline-none transition-colors">
+                <i class="fas fa-globe-europe mr-2"></i> IELTS Academic
+            </button>
         </div>
 
         <!-- Test Container -->
         <div id="test-container" class="bg-white rounded-xl shadow-md border border-slate-100 p-6 md:p-8">
             
             <!-- Screen 1: Welcome/Info -->
-            <div id="welcome-screen" class="text-center py-8">
-                <div class="inline-flex justify-center items-center w-16 h-16 rounded-full bg-blue-100 mb-6">
-                    <i class="fas fa-book-open text-2xl text-blue-600"></i>
+            <div id="welcome-screen" class="text-center py-6">
+                <div class="inline-flex justify-center items-center w-20 h-20 rounded-full bg-blue-100 mb-6">
+                    <i id="test-icon" class="fas fa-book-open text-3xl text-blue-600"></i>
                 </div>
-                <h2 class="text-2xl font-bold text-slate-800 mb-4" id="test-title">General English Test</h2>
-                <p class="text-slate-600 mb-8 max-w-2xl mx-auto" id="test-desc">Tes ini dirancang untuk mengukur kemampuan dasar bahasa Inggris Anda. Pastikan Anda berada di tempat yang tenang sebelum memulai ujian.</p>
-                <button onclick="startTest()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300 shadow-md flex items-center justify-center mx-auto gap-2">
-                    Mulai Ujian <i class="fas fa-arrow-right"></i>
+                <h2 class="text-3xl font-bold text-slate-800 mb-3" id="test-title">CEFR Placement Test</h2>
+                
+                <div class="flex flex-wrap justify-center gap-4 mb-6 text-sm font-medium">
+                    <span class="bg-slate-100 text-slate-600 px-4 py-2 rounded-full"><i class="fas fa-list-ol mr-2"></i><span id="test-total-q">50</span> Soal</span>
+                    <span class="bg-slate-100 text-slate-600 px-4 py-2 rounded-full"><i class="far fa-clock mr-2"></i><span id="test-time-limit">60</span> Menit</span>
+                </div>
+
+                <p class="text-slate-600 mb-8 max-w-3xl mx-auto leading-relaxed text-left p-4 bg-blue-50/50 rounded-lg border border-blue-100" id="test-desc">
+                    Tes ini dirancang untuk...
+                </p>
+                
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8 text-left max-w-3xl mx-auto">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-exclamation-triangle text-yellow-500"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-yellow-700 font-medium">
+                                Perhatian: Pastikan Anda menggunakan earphone/headphone untuk sesi Listening dan berada di ruangan yang tenang. Waktu tidak dapat dihentikan (pause) setelah dimulai.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="startTest()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-xl transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center mx-auto gap-3 text-lg">
+                    Mulai Simulasi <i class="fas fa-play"></i>
                 </button>
             </div>
 
             <!-- Screen 2: Active Quiz -->
             <div id="quiz-screen" class="hidden">
-                <div class="flex flex-wrap justify-between items-center mb-6 pb-4 border-b border-slate-100 gap-4">
-                    <span class="text-sm font-semibold text-slate-500 bg-slate-100 px-3 py-1 rounded-full">Soal <span id="current-q">1</span> dari <span id="total-q">10</span></span>
-                    <span class="text-sm font-bold text-blue-700 bg-blue-50 px-3 py-1 rounded-full border border-blue-100"><i class="far fa-clock mr-1"></i> Waktu: <span id="timer">00:00</span></span>
+                <div class="flex flex-col sm:flex-row justify-between items-center mb-6 pb-4 border-b border-slate-200 gap-4">
+                    <div class="flex items-center gap-4 w-full sm:w-auto">
+                        <span class="text-sm font-semibold text-slate-600 bg-slate-100 px-4 py-2 rounded-lg border border-slate-200 shadow-sm w-full sm:w-auto text-center">
+                            Bagian: <span id="section-name" class="text-blue-600 font-bold uppercase">Reading</span>
+                        </span>
+                        <span class="text-sm font-semibold text-slate-600 bg-slate-100 px-4 py-2 rounded-lg border border-slate-200 shadow-sm w-full sm:w-auto text-center">
+                            Soal <span id="current-q" class="font-bold">1</span> / <span id="total-q">10</span>
+                        </span>
+                    </div>
+                    
+                    <div class="w-full sm:w-auto bg-blue-50 px-5 py-2 rounded-lg border-2 border-blue-200 shadow-sm flex items-center justify-center sm:justify-start gap-2" id="timer-container">
+                        <i class="fas fa-stopwatch text-blue-600 text-lg"></i>
+                        <span class="text-lg font-mono font-bold text-blue-700" id="timer">00:00:00</span>
+                    </div>
                 </div>
                 
-                <div class="min-h-[250px]">
-                    <div id="question-text" class="text-xl font-medium text-slate-800 mb-6 leading-relaxed"></div>
-                    <div id="options-container" class="space-y-3">
+                <!-- Audio Player (Hidden by default) -->
+                <div id="audio-container" class="hidden mb-6 bg-slate-50 p-4 rounded-xl border border-slate-200 shadow-inner">
+                    <div class="flex items-center gap-3 mb-2">
+                        <i class="fas fa-headphones text-blue-500 text-xl"></i>
+                        <h3 class="font-semibold text-slate-700">Listening Passage</h3>
+                        <span class="text-xs font-bold text-white bg-red-500 px-2 py-1 rounded ml-auto animate-pulse">PLAYING ONCE</span>
+                    </div>
+                    <!-- Mock Audio Player UI -->
+                    <div class="w-full bg-slate-200 rounded-full h-2.5 mb-2 mt-4 relative overflow-hidden">
+                        <div id="audio-progress" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+                    </div>
+                    <div class="flex justify-between text-xs text-slate-500 font-mono">
+                        <span id="audio-time">00:00</span>
+                        <span>01:45</span>
+                    </div>
+                    <p class="text-sm text-slate-500 mt-3 italic"><i class="fas fa-info-circle mr-1"></i> Audio hanya diputar satu kali. (Simulasi: Teks audio ditampilkan di bawah)</p>
+                    <div id="audio-transcript-mock" class="mt-3 p-3 bg-white border border-slate-200 rounded text-sm text-slate-600 h-24 overflow-y-auto hidden">
+                        [Transcript Audio muncul di sini untuk keperluan demo/latihan]
+                    </div>
+                </div>
+
+                <!-- Reading Passage (Hidden by default) -->
+                <div id="reading-container" class="hidden mb-6 bg-slate-50 p-5 rounded-xl border border-slate-200 shadow-inner h-64 overflow-y-auto">
+                    <h3 class="font-bold text-slate-800 mb-3 text-lg" id="passage-title">Reading Passage</h3>
+                    <div id="passage-text" class="text-slate-700 leading-relaxed space-y-4 text-justify">
+                        <!-- Passage injected here -->
+                    </div>
+                </div>
+
+                <div class="min-h-[250px] mt-4">
+                    <div class="flex gap-3 mb-6">
+                        <span id="q-number-badge" class="bg-blue-600 text-white font-bold h-8 w-8 flex-shrink-0 flex items-center justify-center rounded-full">1</span>
+                        <div id="question-text" class="text-lg font-medium text-slate-800 leading-relaxed pt-1"></div>
+                    </div>
+                    
+                    <div id="options-container" class="space-y-3 pl-11">
                         <!-- Options injected via JavaScript -->
                     </div>
                 </div>
 
-                <div class="mt-8 flex justify-end">
-                    <button id="next-btn" onclick="nextQuestion()" class="hidden bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-300 shadow-sm">
-                        Selanjutnya <i class="fas fa-chevron-right ml-1"></i>
+                <div class="mt-8 flex justify-between items-center border-t border-slate-100 pt-6">
+                    <button id="prev-btn" onclick="prevQuestion()" class="hidden bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold py-2 px-6 rounded-lg transition duration-300">
+                        <i class="fas fa-chevron-left mr-1"></i> Sebelumnya
                     </button>
-                    <button id="submit-btn" onclick="showResults()" class="hidden bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-300 shadow-sm">
-                        Selesai & Lihat Hasil <i class="fas fa-check ml-1"></i>
-                    </button>
+                    <div class="ml-auto">
+                        <button id="next-btn" onclick="nextQuestion()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-8 rounded-lg transition duration-300 shadow-md">
+                            Selanjutnya <i class="fas fa-chevron-right ml-1"></i>
+                        </button>
+                        <button id="submit-btn" onclick="finishTest()" class="hidden bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-8 rounded-lg transition duration-300 shadow-md">
+                            Selesaikan Ujian <i class="fas fa-flag-checkered ml-2"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Screen 3: Results -->
-            <div id="result-screen" class="hidden text-center py-8">
-                <div class="inline-block p-4 rounded-full bg-blue-50 mb-4 border-4 border-blue-100">
-                    <i class="fas fa-trophy text-5xl text-blue-600"></i>
+            <!-- Screen 3: Results & Review -->
+            <div id="result-screen" class="hidden py-4">
+                <div class="text-center mb-10">
+                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 mb-4 border-4 border-green-200">
+                        <i class="fas fa-certificate text-4xl text-green-600"></i>
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-slate-800 mb-2">Test Report</h2>
+                    <p class="text-slate-600" id="result-date">Terselesaikan pada: </p>
                 </div>
-                <h2 class="text-3xl font-bold text-slate-800 mb-2">Ujian Selesai!</h2>
-                <p class="text-slate-600 mb-6">Kerja bagus! Berikut adalah hasil evaluasi Anda:</p>
                 
-                <div class="bg-gradient-to-br from-blue-50 to-slate-50 rounded-xl border border-blue-100 p-6 max-w-sm mx-auto shadow-sm mb-8">
-                    <div class="text-sm text-slate-500 font-semibold mb-1 uppercase tracking-wider">Total Skor</div>
-                    <div class="text-5xl font-extrabold text-blue-600 mb-2" id="score-display">0/0</div>
-                    <div class="inline-block bg-white px-4 py-2 rounded-lg border border-slate-200 mt-2">
-                        <span class="text-slate-600 font-bold" id="score-percentage">0% Akurasi</span>
+                <!-- Score Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10" id="score-cards">
+                    <!-- Cards injected via JS based on test type -->
+                </div>
+
+                <!-- Overall Level / Band -->
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-8 text-center text-white shadow-xl mb-12">
+                    <h3 class="text-blue-100 font-semibold mb-2 uppercase tracking-widest text-sm">Overall Assessment</h3>
+                    <div class="text-5xl font-black mb-4" id="final-score-main">C1 Advanced</div>
+                    <p class="text-blue-100 max-w-2xl mx-auto" id="score-description">Anda memiliki pemahaman bahasa Inggris tingkat lanjut yang sangat baik, setara dengan standar akademik internasional.</p>
+                </div>
+                
+                <!-- Answer Review Section -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center border-b pb-2">
+                        <i class="fas fa-clipboard-check text-blue-600 mr-3"></i> Kunci Jawaban & Pembahasan
+                    </h3>
+                    <p class="text-slate-600 mb-6 bg-blue-50 p-4 rounded-lg border border-blue-100">
+                        Gunakan pembahasan di bawah ini sebagai bahan evaluasi belajar Anda.
+                    </p>
+                    
+                    <!-- Section Filter for Review -->
+                    <div class="flex flex-wrap gap-2 mb-6" id="review-filters">
+                        <!-- Filters injected via JS -->
+                    </div>
+
+                    <div id="review-container" class="space-y-6">
+                        <!-- Review items injected via JS -->
                     </div>
                 </div>
                 
-                <button onclick="resetTest()" class="bg-slate-800 hover:bg-slate-900 text-white font-semibold py-3 px-8 rounded-lg transition duration-300 shadow-md">
-                    <i class="fas fa-redo mr-2"></i> Coba Lagi
-                </button>
+                <div class="flex justify-center border-t border-slate-200 pt-8 mt-8">
+                    <button onclick="resetApp()" class="bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-10 rounded-xl transition duration-300 shadow-lg">
+                        <i class="fas fa-home mr-2"></i> Kembali ke Menu Utama
+                    </button>
+                </div>
             </div>
             
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-6 mt-auto">
+    <footer class="bg-slate-900 text-slate-400 py-8 mt-auto">
         <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2026 EduTest Pro.</p>
-            <p class="text-sm mt-1 text-slate-500">Didesain khusus untuk evaluasi mandiri (Self-Assessment).</p>
+            <p class="font-semibold text-slate-300">&copy; 2026 EduTest Pro Advanced.</p>
+            <p class="text-sm mt-2 max-w-2xl mx-auto text-slate-500">Platform ini dirancang khusus untuk simulasi latihan mandiri. Format, waktu, dan penilaian dibuat semirip mungkin dengan standar CEFR, ETS (TOEFL), dan Cambridge (IELTS) untuk keperluan persiapan sertifikasi.</p>
         </div>
     </footer>
 
+    <script src="test-data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
