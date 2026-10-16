@@ -1,6 +1,113 @@
-// test-data.js - EduTest Pro v3 Realistic Data Warehouse
+// test-data.js - EduTest Pro v3 Realistic Data Warehouse (with CEFR)
 
 const db = {
+    cefr: {
+        id: "cefr",
+        title: "CEFR Placement Test",
+        icon: "fa-layer-group",
+        timeLimit: 30 * 60, // 30 mins
+        desc: {
+            id: "Tes ini dirancang khusus untuk mengukur tingkat kemahiran Bahasa Inggris umum Anda berdasarkan kerangka standar internasional <b>CEFR (Common European Framework of Reference for Languages)</b>. Hasil evaluasi mencakup skala level dari <b>A1 (Beginner)</b>, <b>A2 (Elementary)</b>, <b>B1 (Intermediate)</b>, <b>B2 (Upper-Intermediate)</b>, <b>C1 (Advanced)</b>, hingga <b>C2 (Proficient/Mastery)</b>.<br><br><b>Cakupan Materi:</b><br>• Tatabahasa & Kosakata Akademik (Grammar & Vocabulary)<br>• Pemahaman Bacaan Teks (Reading Comprehension)<br>• Kunci Jawaban Lengkap dengan Analisis Pembahasan Tatabahasa.",
+            en: "This test is specifically designed to assess your general English proficiency based on the international standard framework <b>CEFR (Common European Framework of Reference for Languages)</b>. The evaluation covers levels from <b>A1 (Beginner)</b> up to <b>C2 (Proficient)</b>.<br><br><b>Test Coverage:</b><br>• Academic Grammar & Vocabulary<br>• Reading Comprehension<br>• Detailed Answer Keys with Grammatical Analysis."
+        },
+        sections: [
+            { id: "grammar", name: "Grammar & Vocabulary", type: "standard" },
+            { id: "reading", name: "Reading Comprehension", type: "reading" }
+        ],
+        questions: [
+            {
+                id: 1,
+                section: "grammar",
+                q: "I ___ to the cinema with my close friends yesterday evening.",
+                options: ["go", "gone", "went", "going"],
+                answer: 2,
+                explanation: {
+                    id: "Kalimat menggunakan keterangan waktu lampau 'yesterday evening', sehingga harus memakai Simple Past Tense (Kata kerja bentuk kedua: V2 dari 'go' adalah 'went').",
+                    en: "The sentence uses the past time signal 'yesterday evening', which requires the Simple Past Tense (V2 of 'go' is 'went')."
+                }
+            },
+            {
+                id: 2,
+                section: "grammar",
+                q: "She has been working as an educator at this institution ___ five years.",
+                options: ["since", "for", "in", "from"],
+                answer: 1,
+                explanation: {
+                    id: "'For' digunakan untuk menunjukkan durasi/jangka waktu (lima tahun). Sementara 'since' digunakan untuk menunjukkan titik awal dimulainya suatu kegiatan.",
+                    en: "'For' is used to denote a duration of time (five years). 'Since' is used to specify a starting point in time."
+                }
+            },
+            {
+                id: 3,
+                section: "grammar",
+                q: "If I ___ a million dollars, I would construct a free public library.",
+                options: ["have", "will have", "had", "would have"],
+                answer: 2,
+                explanation: {
+                    id: "Kalimat ini adalah Conditional Sentence Type 2 (Pengandaian masa kini yang tidak nyata). Rumus: If + Simple Past (had), Subject + would + V1.",
+                    en: "This is a Conditional Sentence Type 2 (unreal present). Formula: If + Simple Past (had), Subject + would + V1."
+                }
+            },
+            {
+                id: 4,
+                section: "grammar",
+                q: "The executive meeting was called ___ because the chief director fell ill.",
+                options: ["off", "out", "up", "down"],
+                answer: 0,
+                explanation: {
+                    id: "Phrasal verb 'call off' bermakna membatalkan (cancel).",
+                    en: "The phrasal verb 'call off' means to cancel."
+                }
+            },
+            {
+                id: 5,
+                section: "grammar",
+                q: "By the time we arrive at the platform, the express train ___.",
+                options: ["will leave", "left", "will have left", "has left"],
+                answer: 2,
+                explanation: {
+                    id: "Future Perfect Tense (will have + V3) digunakan untuk menyatakan peristiwa yang diprediksi sudah selesai di masa depan sebelum kejadian lain terjadi.",
+                    en: "Future Perfect Tense (will have + V3) is used for an action that will be completed before another event in the future."
+                }
+            },
+            {
+                id: 6,
+                section: "reading",
+                passageTitle: "The Essential Role of Pollinators",
+                passageText: "<p>In recent years, agricultural scientists have observed a significant decrease in bee populations worldwide, a phenomenon referred to as Colony Collapse Disorder (CCD). Bees play a crucial role in pollinating approximately one-third of the human food supply, including fruits, vegetables, and nuts. The exact cause of CCD remains under investigation, but researchers point to a combination of pesticide exposure, habitat destruction, climate change, and parasitic infestation.</p><p>Without healthy pollinator populations, global food security faces imminent challenges, leading to increased produce prices and dietary shifts globally.</p>",
+                q: "According to the passage, why are bees considered essential to agriculture?",
+                options: [
+                    "They produce organic honey for commercial export.",
+                    "They pollinate approximately one-third of the human food supply.",
+                    "They eliminate harmful crop parasites naturally.",
+                    "They prevent soil erosion in agricultural areas."
+                ],
+                answer: 1,
+                explanation: {
+                    id: "Teks menyatakan secara langsung: 'Bees play a crucial role in pollinating approximately one-third of the human food supply' (Pilihan B).",
+                    en: "The text explicitly states: 'Bees play a crucial role in pollinating approximately one-third of the human food supply' (Option B)."
+                }
+            },
+            {
+                id: 7,
+                section: "reading",
+                passageTitle: "The Essential Role of Pollinators",
+                passageText: "(Refer to previous passage)",
+                q: "What do researchers believe is responsible for Colony Collapse Disorder (CCD)?",
+                options: [
+                    "Exclusively chemical pesticide usage",
+                    "Rapid global urbanization only",
+                    "A combination of multiple environmental and biological factors",
+                    "A single species of invasive parasitic mite"
+                ],
+                answer: 2,
+                explanation: {
+                    id: "Peneliti menyatakan bahwa CCD disebabkan oleh gabungan beberapa faktor: 'a combination of pesticide exposure, habitat destruction, climate change, and parasitic infestation'.",
+                    en: "Researchers state that CCD is driven by 'a combination of pesticide exposure, habitat destruction, climate change, and parasitic infestation'."
+                }
+            }
+        ]
+    },
     toefl: {
         id: "toefl",
         title: "TOEFL ITP Official Format",

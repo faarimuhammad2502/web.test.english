@@ -1,5 +1,5 @@
 // script.js - EduTest Pro v3 Core Logic
-let activeTest = 'toefl';
+let activeTest = 'cefr'; // Default to CEFR now that it's back
 let currentLang = 'id'; 
 let isDarkMode = false;
 let questions = [];
@@ -22,7 +22,7 @@ const translations = {
         prevBtn: "Sebelumnya", nextBtn: "Selanjutnya", finishBtn: "Selesaikan Ujian",
         resultTitle: "Hasil Laporan Ujian", overallEval: "Evaluasi Tingkat Kemampuan",
         reviewTitle: "Pembahasan & Koreksi Soal", retryBtn: "Coba Ujian Lain",
-        footerSub: "Dirancang untuk simulasi mandiri sertifikasi resmi TOEFL ITP dan IELTS.",
+        footerSub: "Dirancang untuk simulasi mandiri sertifikasi resmi CEFR, TOEFL ITP dan IELTS.",
         explanationHeader: "Analisis Pembahasan:"
     },
     en: {
@@ -36,7 +36,7 @@ const translations = {
         prevBtn: "Previous", nextBtn: "Next", finishBtn: "Finish Exam",
         resultTitle: "Test Performance Report", overallEval: "Overall Assessment",
         reviewTitle: "Explanations & Corrections", retryBtn: "Take Another Test",
-        footerSub: "Designed for self-assessment for official TOEFL ITP and IELTS certifications.",
+        footerSub: "Designed for self-assessment for official CEFR, TOEFL ITP and IELTS certifications.",
         explanationHeader: "Analysis & Explanation:"
     }
 };
@@ -194,7 +194,18 @@ function finishTest() {
     `;
 
     const pct = (r/questions.length)*100;
-    if (activeTest === 'toefl') {
+    
+    if (activeTest === 'cefr') {
+        let level = "A1 Beginner";
+        let desc = currentLang === 'id' ? "Anda berada pada tingkat awal kemampuan dasar." : "You are at the foundational beginner stage.";
+        if (pct >= 90) { level = "C2 Proficient"; desc = currentLang === 'id' ? "Bahasa Inggris Anda setara dengan penutur asli akademis." : "Your English command is equivalent to an educated native speaker."; }
+        else if (pct >= 75) { level = "C1 Advanced"; desc = currentLang === 'id' ? "Anda mampu memahami teks kompleks dan berkomunikasi dengan sangat lancar." : "You understand complex texts and express ideas fluently and spontaneously."; }
+        else if (pct >= 55) { level = "B2 Upper-Intermediate"; desc = currentLang === 'id' ? "Anda dapat berkomunikasi secara efektif dalam konteks profesional & akademis." : "You communicate effectively in professional and academic contexts."; }
+        else if (pct >= 35) { level = "B1 Intermediate"; desc = currentLang === 'id' ? "Anda memahami poin-poin utama topik umum harian." : "You understand the main points of clear standard input on familiar matters."; }
+        else if (pct >= 20) { level = "A2 Elementary"; desc = currentLang === 'id' ? "Anda mampu memahami ungkapan-ungkapan dasar harian." : "You understand basic sentences and frequently used expressions."; }
+        document.getElementById('final-score-main').innerText = level;
+        document.getElementById('score-description').innerText = desc;
+    } else if (activeTest === 'toefl') {
         const est = Math.round(310 + ((pct/100)*367)); // rough PBT calculation 310-677
         document.getElementById('final-score-main').innerText = `TOEFL ITP: ${est}`;
         document.getElementById('score-description').innerText = currentLang === 'id' ? "Estimasi konversi skor TOEFL PBT/ITP (Skala 310-677)." : "Estimated TOEFL PBT/ITP conversion (310-677 Scale).";
@@ -214,4 +225,4 @@ function finishTest() {
     });
 }
 
-window.onload = () => { switchTab('toefl'); updateLanguageUI(); };
+window.onload = () => { switchTab('cefr'); updateLanguageUI(); };
