@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduTest Pro - Standardized English Test Platform</title>
+    <title>EduTest Pro - Full Capacity Simulation</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -31,11 +31,11 @@
                     </div>
                     <div>
                         <span class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">EduTest Pro</span>
-                        <span class="hidden sm:inline-block text-[10px] uppercase tracking-wider font-bold bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded-full ml-2">v3 Realistic</span>
+                        <span class="hidden sm:inline-block text-[10px] uppercase tracking-wider font-bold bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 px-2 py-0.5 rounded-full ml-2">Full Capacity</span>
                     </div>
                 </div>
 
-                <!-- Right Utility Bar (Language + Dark Mode) -->
+                <!-- Right Utility Bar -->
                 <div class="flex items-center gap-3">
                     <button id="lang-toggle-btn" onclick="toggleLanguage()" class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100/80 dark:bg-slate-800/80 text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition shadow-sm">
                         <i class="fas fa-globe text-blue-500"></i>
@@ -51,8 +51,6 @@
 
     <!-- Main Container -->
     <main class="flex-grow container mx-auto px-4 py-8 max-w-5xl">
-        
-        <!-- Hero Header -->
         <div class="text-center mb-8" id="main-header">
             <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3" data-i18n="heroTitle">
                 Simulasi Ujian Standar Internasional
@@ -62,7 +60,6 @@
             </p>
         </div>
 
-        <!-- Navigation Tabs -->
         <div class="flex justify-center mb-8 border-b border-slate-200 dark:border-slate-800 overflow-x-auto" id="tabs-nav">
             <button onclick="switchTab('cefr')" id="tab-cefr" class="tab-btn flex items-center gap-2 px-5 py-3 font-semibold text-sm border-b-2 border-transparent text-slate-500 dark:text-slate-400 hover:text-blue-600 whitespace-nowrap transition">
                 <i class="fas fa-layer-group"></i> CEFR Level Test
@@ -75,20 +72,12 @@
             </button>
         </div>
 
-        <!-- Card Wrapper -->
         <div id="test-container" class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 border border-slate-200/80 dark:border-slate-800 p-6 sm:p-8 transition-colors duration-300">
-            
-            <!-- SCREEN 1: Welcome / Pre-Test Info -->
             <div id="welcome-screen" class="text-center py-4">
-                
                 <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-800/50 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-slate-700 mb-6 shadow-inner">
                     <i id="test-icon" class="fas fa-globe-americas text-3xl"></i>
                 </div>
-                
-                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-4" id="test-title">
-                    TOEFL iBT Simulation
-                </h2>
-                
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-4" id="test-title">TOEFL iBT Simulation</h2>
                 <div class="flex flex-wrap justify-center gap-3 sm:gap-4 mb-6">
                     <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold border border-slate-200 dark:border-slate-700">
                         <i class="fas fa-list-ol text-blue-500"></i> <span id="test-total-q">0</span> <span data-i18n="questionsCount">Soal</span>
@@ -96,52 +85,45 @@
                     <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold border border-slate-200 dark:border-slate-700">
                         <i class="far fa-clock text-blue-500"></i> <span id="test-time-limit">0</span> <span data-i18n="minutesCount">Menit</span>
                     </span>
-                    <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold border border-slate-200 dark:border-slate-700">
-                        <i class="fas fa-volume-up text-blue-500"></i> Audio TTS
+                    <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 text-xs sm:text-sm font-semibold border border-amber-200 dark:border-amber-800">
+                        <i class="fas fa-database"></i> Full Capacity Set
                     </span>
                 </div>
-
                 <div class="text-left bg-gradient-to-br from-slate-50 to-blue-50/30 dark:from-slate-800/50 dark:to-slate-900/50 p-5 sm:p-6 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-6" id="test-desc"></div>
-
                 <div class="text-left bg-amber-50 dark:bg-amber-950/40 border-l-4 border-amber-500 p-4 rounded-r-xl mb-8">
                     <div class="flex items-start gap-3">
                         <i class="fas fa-triangle-exclamation text-amber-600 dark:text-amber-400 text-lg mt-0.5"></i>
                         <p class="text-xs sm:text-sm text-amber-800 dark:text-amber-200 font-medium leading-relaxed" data-i18n="testNotice">
-                            Perhatian: Disarankan menggunakan earphone/headphone untuk sesi Listening. Timer berjalan terus begitu Anda menekan tombol mulai.
+                            Perhatian: Set simulasi ketahanan telah aktif (ratusan soal placeholder dimasukkan).
                         </p>
                     </div>
                 </div>
-
                 <button onclick="startTest()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-4 px-10 rounded-xl transition duration-300 shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/35 transform hover:-translate-y-0.5 flex items-center justify-center mx-auto gap-3 text-base sm:text-lg">
                     <span data-i18n="startBtn">Mulai Simulasi</span> <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
 
-            <!-- SCREEN 2: Active Test View -->
+            <!-- Rest of logic wrapper is same -->
             <div id="quiz-screen" class="hidden">
                 <div class="flex flex-col sm:flex-row justify-between items-center pb-4 mb-6 border-b border-slate-200 dark:border-slate-800 gap-3">
                     <div class="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-between sm:justify-start">
-                        <span id="section-badge" class="text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
-                            READING
-                        </span>
+                        <span id="section-badge" class="text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">READING</span>
                         <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">
                             <span data-i18n="question">Soal</span> <span id="current-q" class="font-bold text-slate-800 dark:text-white">1</span> / <span id="total-q">10</span>
                         </span>
                     </div>
-
                     <div class="flex items-center gap-3 w-full sm:w-auto justify-between">
                         <button onclick="toggleGridPalette()" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition flex items-center gap-1.5">
                             <i class="fas fa-th"></i> <span data-i18n="gridBtn">Peta Soal</span>
                         </button>
                         <div class="flex items-center gap-2 px-4 py-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-sm font-mono font-bold">
-                            <i class="far fa-clock"></i>
-                            <span id="timer">00:00:00</span>
+                            <i class="far fa-clock"></i> <span id="timer">00:00:00</span>
                         </div>
                     </div>
                 </div>
 
-                <div id="grid-palette" class="hidden mb-6 p-4 bg-slate-50 dark:bg-slate-800/80 rounded-xl border border-slate-200 dark:border-slate-700">
-                    <div class="flex items-center justify-between mb-3">
+                <div id="grid-palette" class="hidden mb-6 p-4 bg-slate-50 dark:bg-slate-800/80 rounded-xl border border-slate-200 dark:border-slate-700 max-h-60 overflow-y-auto">
+                    <div class="flex items-center justify-between mb-3 sticky top-0 bg-slate-50 dark:bg-slate-800 pb-2 border-b border-slate-200 dark:border-slate-700">
                         <span class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider" data-i18n="questionPalette">Navigasi Soal</span>
                         <button onclick="toggleGridPalette()" class="text-slate-400 hover:text-slate-600 text-xs"><i class="fas fa-times"></i> Tutup</button>
                     </div>
@@ -160,7 +142,6 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div class="flex flex-wrap items-center gap-3 bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
                         <button id="play-audio-btn" onclick="playQuestionSpeech()" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-2 shadow transition">
                             <i id="play-audio-icon" class="fas fa-play"></i> <span id="play-audio-label">Putar Audio</span>
@@ -168,13 +149,9 @@
                         <button onclick="stopQuestionSpeech()" class="px-3 py-2 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-300 transition">
                             <i class="fas fa-stop"></i>
                         </button>
-                        <div class="text-xs text-slate-500 dark:text-slate-400 italic ml-auto flex items-center gap-1">
-                            <i class="fas fa-volume-up text-blue-500"></i> AI Native Voice Speech
-                        </div>
                     </div>
-
                     <details class="mt-3 text-xs text-slate-600 dark:text-slate-400">
-                        <summary class="cursor-pointer font-semibold hover:text-blue-600 transition" data-i18n="showTranscript">Tampilkan Transkrip Teks (Bantuan Latihan)</summary>
+                        <summary class="cursor-pointer font-semibold hover:text-blue-600 transition" data-i18n="showTranscript">Tampilkan Transkrip Teks</summary>
                         <div id="audio-transcript-text" class="mt-2 p-4 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 font-serif leading-relaxed text-sm"></div>
                     </details>
                 </div>
@@ -207,49 +184,30 @@
                         </button>
                     </div>
                 </div>
-
             </div>
 
-            <!-- SCREEN 3: Test Report -->
+            <!-- SCREEN 3: Result -->
             <div id="result-screen" class="hidden">
                 <div class="text-center mb-8">
-                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 mb-4 shadow-sm">
-                        <i class="fas fa-award text-4xl"></i>
-                    </div>
                     <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mb-1" data-i18n="resultTitle">Hasil Laporan Ujian</h2>
-                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400" id="result-date"></p>
                 </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8" id="score-cards"></div>
-
-                <div class="bg-gradient-to-r from-blue-600 to-indigo-700 dark:from-blue-700 dark:to-indigo-800 rounded-2xl p-6 sm:p-8 text-center text-white shadow-xl shadow-blue-500/10 mb-10">
-                    <span class="text-xs font-bold uppercase tracking-widest text-blue-200 mb-2 block" data-i18n="overallEval">Evaluasi Tingkat Kemampuan</span>
-                    <div class="text-4xl sm:text-5xl font-black mb-3" id="final-score-main">C1 Advanced</div>
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-6 text-center text-white shadow-xl mb-10">
+                    <span class="text-xs font-bold uppercase tracking-widest text-blue-200 mb-2 block" data-i18n="overallEval">Evaluasi</span>
+                    <div class="text-4xl sm:text-5xl font-black mb-3" id="final-score-main">Finished</div>
                     <p class="text-xs sm:text-sm text-blue-100 max-w-xl mx-auto leading-relaxed" id="score-description"></p>
                 </div>
-
-                <div class="mb-8">
-                    <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3 mb-6">
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                            <i class="fas fa-clipboard-check text-blue-500"></i> <span data-i18n="reviewTitle">Pembahasan & Koreksi Soal</span>
-                        </h3>
-                    </div>
-                    <div id="review-container" class="space-y-6"></div>
-                </div>
-
                 <div class="text-center pt-6 border-t border-slate-200 dark:border-slate-800">
-                    <button onclick="resetApp()" class="px-8 py-3 rounded-xl bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-bold text-sm hover:opacity-90 transition shadow-lg flex items-center justify-center mx-auto gap-2">
-                        <i class="fas fa-redo"></i> <span data-i18n="retryBtn">Coba Ujian Lain</span>
+                    <button onclick="resetApp()" class="px-8 py-3 rounded-xl bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-bold text-sm hover:opacity-90 transition">
+                        <i class="fas fa-redo"></i> Coba Ujian Lain
                     </button>
                 </div>
             </div>
         </div>
     </main>
 
-    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 mt-auto transition-colors duration-300">
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 mt-auto">
         <div class="container mx-auto px-4 text-center">
-            <p class="text-xs font-semibold text-slate-600 dark:text-slate-400">&copy; 2026 EduTest Pro Assessment. All rights reserved.</p>
-            <p class="text-[11px] text-slate-400 dark:text-slate-500 mt-1" data-i18n="footerSub">Dirancang untuk simulasi mandiri persiapan sertifikasi resmi CEFR, TOEFL iBT, dan IELTS Academic.</p>
+            <p class="text-xs font-semibold text-slate-600 dark:text-slate-400">&copy; 2026 EduTest Pro Assessment. Full Capacity Edition.</p>
         </div>
     </footer>
 
