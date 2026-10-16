@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduTest Pro - Full Capacity Simulation</title>
+    <title>EduTest Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -25,18 +25,17 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
-                <div class="flex items-center gap-3 cursor-pointer group" onclick="resetApp()">
+                <div class="flex items-center gap-3 cursor-pointer group" id="logo-nav" onclick="resetApp()">
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:shadow-blue-500/40 transition-shadow">
                         <i class="fas fa-graduation-cap text-xl"></i>
                     </div>
                     <div>
                         <span class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">EduTest Pro</span>
-                        <span class="hidden sm:inline-block text-[10px] uppercase tracking-wider font-bold bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 px-2 py-0.5 rounded-full ml-2">Full Capacity</span>
                     </div>
                 </div>
 
                 <!-- Right Utility Bar -->
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-3" id="utility-nav">
                     <button id="lang-toggle-btn" onclick="toggleLanguage()" class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100/80 dark:bg-slate-800/80 text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition shadow-sm">
                         <i class="fas fa-globe text-blue-500"></i>
                         <span id="lang-label">ID | EN</span>
@@ -53,7 +52,7 @@
     <main class="flex-grow container mx-auto px-4 py-8 max-w-5xl">
         <div class="text-center mb-8" id="main-header">
             <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3" data-i18n="heroTitle">
-                Simulasi Ujian Standar Internasional
+                Ujian Standar Internasional
             </h1>
             <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto" data-i18n="heroSubtitle">
                 Evaluasi & tingkatkan skor kemampuan Bahasa Inggris Anda dengan format, waktu, dan kisi-kisi soal yang otentik.
@@ -65,11 +64,28 @@
                 <i class="fas fa-layer-group"></i> CEFR Level Test
             </button>
             <button onclick="switchTab('toefl')" id="tab-toefl" class="tab-btn flex items-center gap-2 px-5 py-3 font-semibold text-sm border-b-2 border-blue-600 text-blue-600 dark:text-blue-400 whitespace-nowrap transition">
-                <i class="fas fa-globe-americas"></i> TOEFL iBT Simulation
+                <i class="fas fa-globe-americas"></i> TOEFL iBT
             </button>
             <button onclick="switchTab('ielts')" id="tab-ielts" class="tab-btn flex items-center gap-2 px-5 py-3 font-semibold text-sm border-b-2 border-transparent text-slate-500 dark:text-slate-400 hover:text-blue-600 whitespace-nowrap transition">
                 <i class="fas fa-globe-europe"></i> IELTS Academic
             </button>
+        </div>
+
+        <!-- Confirm Modal -->
+        <div id="confirm-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4">
+            <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-700 transform scale-95 transition-transform duration-300" id="confirm-modal-box">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600 dark:text-blue-400">
+                        <i class="fas fa-shield-alt text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2" data-i18n="confirmTitle">Konfirmasi Ujian</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-6" data-i18n="confirmDesc">Apakah Anda yakin sudah siap memulai ujian ini? Setelah dimulai, ujian tidak dapat dibatalkan, dijeda, atau ditutup hingga Anda menyelesaikannya.</p>
+                    <div class="flex gap-3">
+                        <button onclick="closeConfirmModal()" class="flex-1 px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold text-sm transition" data-i18n="cancelBtn">Batal</button>
+                        <button onclick="startTestConfirmed()" class="flex-1 px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm transition shadow-lg shadow-blue-500/30" data-i18n="confirmBtn">Ya, Mulai Ujian</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="test-container" class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 border border-slate-200/80 dark:border-slate-800 p-6 sm:p-8 transition-colors duration-300">
@@ -77,7 +93,7 @@
                 <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-800/50 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-slate-700 mb-6 shadow-inner">
                     <i id="test-icon" class="fas fa-globe-americas text-3xl"></i>
                 </div>
-                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-4" id="test-title">TOEFL iBT Simulation</h2>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-4" id="test-title">TOEFL iBT</h2>
                 <div class="flex flex-wrap justify-center gap-3 sm:gap-4 mb-6">
                     <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold border border-slate-200 dark:border-slate-700">
                         <i class="fas fa-list-ol text-blue-500"></i> <span id="test-total-q">0</span> <span data-i18n="questionsCount">Soal</span>
@@ -85,25 +101,21 @@
                     <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold border border-slate-200 dark:border-slate-700">
                         <i class="far fa-clock text-blue-500"></i> <span id="test-time-limit">0</span> <span data-i18n="minutesCount">Menit</span>
                     </span>
-                    <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 text-xs sm:text-sm font-semibold border border-amber-200 dark:border-amber-800">
-                        <i class="fas fa-database"></i> Full Capacity Set
-                    </span>
                 </div>
                 <div class="text-left bg-gradient-to-br from-slate-50 to-blue-50/30 dark:from-slate-800/50 dark:to-slate-900/50 p-5 sm:p-6 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-6" id="test-desc"></div>
                 <div class="text-left bg-amber-50 dark:bg-amber-950/40 border-l-4 border-amber-500 p-4 rounded-r-xl mb-8">
                     <div class="flex items-start gap-3">
                         <i class="fas fa-triangle-exclamation text-amber-600 dark:text-amber-400 text-lg mt-0.5"></i>
                         <p class="text-xs sm:text-sm text-amber-800 dark:text-amber-200 font-medium leading-relaxed" data-i18n="testNotice">
-                            Perhatian: Set simulasi ketahanan telah aktif (ratusan soal placeholder dimasukkan).
+                            Perhatian: Ujian bersifat strict. Anda tidak bisa keluar dari halaman ini sebelum ujian selesai.
                         </p>
                     </div>
                 </div>
-                <button onclick="startTest()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-4 px-10 rounded-xl transition duration-300 shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/35 transform hover:-translate-y-0.5 flex items-center justify-center mx-auto gap-3 text-base sm:text-lg">
-                    <span data-i18n="startBtn">Mulai Simulasi</span> <i class="fas fa-arrow-right"></i>
+                <button onclick="openConfirmModal()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-4 px-10 rounded-xl transition duration-300 shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/35 transform hover:-translate-y-0.5 flex items-center justify-center mx-auto gap-3 text-base sm:text-lg">
+                    <span data-i18n="startBtn">Mulai Ujian</span> <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
 
-            <!-- Rest of logic wrapper is same -->
             <div id="quiz-screen" class="hidden">
                 <div class="flex flex-col sm:flex-row justify-between items-center pb-4 mb-6 border-b border-slate-200 dark:border-slate-800 gap-3">
                     <div class="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-between sm:justify-start">
@@ -197,17 +209,17 @@
                     <p class="text-xs sm:text-sm text-blue-100 max-w-xl mx-auto leading-relaxed" id="score-description"></p>
                 </div>
                 <div class="text-center pt-6 border-t border-slate-200 dark:border-slate-800">
-                    <button onclick="resetApp()" class="px-8 py-3 rounded-xl bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-bold text-sm hover:opacity-90 transition">
-                        <i class="fas fa-redo"></i> Coba Ujian Lain
+                    <button onclick="resetApp()" class="px-8 py-3 rounded-xl bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-bold text-sm hover:opacity-90 transition" data-i18n="backBtn">
+                        <i class="fas fa-home"></i> Kembali ke Beranda
                     </button>
                 </div>
             </div>
         </div>
     </main>
 
-    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 mt-auto">
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 mt-auto transition-colors duration-300">
         <div class="container mx-auto px-4 text-center">
-            <p class="text-xs font-semibold text-slate-600 dark:text-slate-400">&copy; 2026 EduTest Pro Assessment. Full Capacity Edition.</p>
+            <p class="text-xs font-semibold text-slate-600 dark:text-slate-400">&copy; 2026 EduTest Pro Assessment. Strict Test Edition.</p>
         </div>
     </footer>
 
