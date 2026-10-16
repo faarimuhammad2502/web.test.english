@@ -1,251 +1,450 @@
 <!DOCTYPE html>
-<html lang="id" class="light">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduTest Pro | Assessment</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Simulasi Real Test: TOEFL & IELTS</title>
+    <style>
+        :root {
+            --primary-orange: #f57c00;
+            --hover-orange: #e65100;
+            --light-orange: #ffcc80;
+            --cream: #fff8e1;
+            --cream-hover: #ffecb3;
+            --white: #ffffff;
+            --text-dark: #212121;
+            --text-gray: #424242;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fcfcfc;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: var(--white);
+            padding: 15px 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--primary-orange);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            color: var(--primary-orange);
+            font-size: 1.5em;
+        }
+
+        .timer {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #d32f2f;
+            background: var(--cream);
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: 1px solid var(--light-orange);
+            display: none;
+        }
+
+        .menu-container {
+            max-width: 800px;
+            margin: 50px auto;
+            text-align: center;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--cream-hover);
+        }
+
+        .menu-container h2 {
+            margin-bottom: 20px;
+            color: var(--text-gray);
+        }
+
+        .menu-btn {
+            background-color: var(--primary-orange);
+            color: var(--white);
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 10px;
+            width: 250px;
+        }
+
+        .menu-btn:hover {
+            background-color: var(--hover-orange);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(245, 124, 0, 0.3);
+        }
+
+        /* Layout Test Area */
+        .test-section {
+            display: none;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .test-section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        /* Khusus TOEFL (Satu Kolom) */
+        .toefl-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Khusus IELTS (Dua Kolom: Kiri Bacaan, Kanan Soal) */
+        .ielts-container {
+            display: flex;
+            gap: 20px;
+            height: 80vh;
+        }
+
+        .reading-pane {
+            flex: 1;
+            background-color: var(--cream);
+            padding: 30px;
+            border-radius: 8px;
+            overflow-y: auto;
+            border: 1px solid var(--light-orange);
+            font-size: 1.05em;
+            text-align: justify;
+        }
+
+        .reading-pane h3 {
+            color: var(--primary-orange);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .reading-pane p {
+            margin-bottom: 15px;
+        }
+
+        .questions-pane {
+            flex: 1;
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .question-box {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .question-number {
+            font-weight: bold;
+            color: var(--primary-orange);
+            margin-right: 5px;
+        }
+
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .options label {
+            display: block;
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            background-color: #fafafa;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .options label:hover {
+            background-color: var(--cream);
+            border-color: var(--light-orange);
+        }
+
+        .options input {
+            margin-right: 12px;
+            accent-color: var(--primary-orange);
+        }
+
+        .submit-btn {
+            background-color: var(--primary-orange);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--hover-orange);
+        }
+
+        .result-box {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background-color: var(--cream);
+            border: 2px solid var(--primary-orange);
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: var(--text-dark);
+        }
+
+        .result-box.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--light-orange); 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-orange); 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1 id="header-title">English Proficiency Simulator</h1>
+        <div id="timer" class="timer">Waktu: <span id="time-display">00:00</span></div>
+    </div>
+
+    <!-- MAIN MENU -->
+    <div id="main-menu" class="menu-container">
+        <h2>Pilih Modul Ujian</h2>
+        <p style="margin-bottom: 30px; color: #666;">Peringatan: Saat Anda memulai tes, waktu akan langsung berjalan.</p>
+        <button class="menu-btn" onclick="startTest('toefl')">TOEFL ITP - Structure<br><span style="font-size: 12px; font-weight: normal;">(15 Soal - 25 Menit)</span></button>
+        <button class="menu-btn" onclick="startTest('ielts')">IELTS - Reading<br><span style="font-size: 12px; font-weight: normal;">(10 Soal - 20 Menit)</span></button>
+    </div>
+
+    <!-- TOEFL SECTION -->
+    <div id="toefl-section" class="test-section">
+        <div class="toefl-container">
+            <div style="background: var(--white); padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 5px solid var(--primary-orange); box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                <strong>Directions:</strong> Questions 1-15 are incomplete sentences. Beneath each sentence you will see four words or phrases, marked A, B, C, and D. Choose the <em>one</em> word or phrase that best completes the sentence.
+            </div>
+            <div id="toefl-questions"></div>
+            <button class="submit-btn" onclick="submitTest('toefl')">Submit TOEFL Test</button>
+            <div id="toefl-result" class="result-box"></div>
+            <button class="menu-btn" style="width:100%; margin: 10px 0; background-color: #757575;" onclick="location.reload()" id="toefl-back-btn" style="display:none;">Kembali ke Menu Utama</button>
+        </div>
+    </div>
+
+    <!-- IELTS SECTION -->
+    <div id="ielts-section" class="test-section">
+        <div style="background: var(--white); padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 5px solid var(--primary-orange); box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <strong>Directions:</strong> Read the passage on the left and answer the questions on the right. 
+        </div>
+        <div class="ielts-container">
+            <!-- Kiri: Bacaan -->
+            <div class="reading-pane">
+                <h3>The Persistence and Peril of Misinformation</h3>
+                <p><strong>A.</strong> In the digital age, access to information is unprecedented, yet this democratization of data has brought with it a significant peril: the rapid spread and persistence of misinformation. Misinformation—false or inaccurate information spread regardless of intent to deceive—has historically existed, but the advent of social media has exponentially increased its reach. Psychologists and sociologists are increasingly examining why false narratives are so resilient, even when confronted with undeniable factual corrections.</p>
+                
+                <p><strong>B.</strong> One of the primary psychological mechanisms behind this phenomenon is 'confirmation bias'. This is the human tendency to search for, interpret, favor, and recall information in a way that confirms one's preexisting beliefs or hypotheses. When individuals encounter news that aligns with their worldview, they are less likely to scrutinize its source or veracity. Conversely, when faced with facts that contradict their deeply held beliefs, a phenomenon known as the 'backfire effect' can occur, where individuals actually strengthen their original false beliefs in response to being challenged.</p>
+                
+                <p><strong>C.</strong> Furthermore, the architecture of modern social media platforms exacerbates cognitive vulnerabilities. Algorithms are designed to maximize user engagement, often prioritizing emotionally charged or sensational content over dry, factual reporting. This creates 'echo chambers' or 'filter bubbles', environments where a person only encounters information or opinions that reflect and reinforce their own. In such closed ecosystems, a piece of misinformation can be repeated so often that it gains the 'illusory truth effect'—the tendency to believe false information to be correct after repeated exposure.</p>
+                
+                <p><strong>D.</strong> Fact-checking initiatives have multiplied in recent years in an attempt to combat this issue. However, research indicates that fact-checking is only partially effective. The correction rarely reaches the same audience size as the original sensationalized falsehood. Moreover, a poorly framed correction can inadvertently reinforce the myth by repeating it, thereby making the false claim more familiar to the reader. To effectively counter misinformation, experts suggest that interventions must not only provide the facts but also explain the rhetorical techniques used to mislead, a method known as 'prebunking' or psychological inoculation.</p>
+            </div>
+            
+            <!-- Kanan: Soal -->
+            <div class="questions-pane">
+                <div id="ielts-questions"></div>
+                <button class="submit-btn" onclick="submitTest('ielts')">Submit IELTS Test</button>
+                <div id="ielts-result" class="result-box"></div>
+                <button class="menu-btn" style="width:100%; margin: 10px 0; background-color: #757575;" onclick="location.reload()" id="ielts-back-btn" style="display:none;">Kembali ke Menu Utama</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: { 
-                extend: { 
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        serif: ['"Lora"', 'serif'],
-                    }
-                } 
+        // --- DATA SOAL TOEFL (15 Soal) ---
+        const toeflData = [
+            { q: "_____ the demands of aerospace, medicine, and agriculture, engineers are creating exotic new metallic substances.", options: ["Meet", "Being met are", "To meet", "They are meeting"], ans: 2 },
+            { q: "James Buchanan, _____ in the United States, was the 15th president.", options: ["he was born", "born", "who bearing", "was born"], ans: 1 },
+            { q: "Not until the 1850s _____ a few public-spirited citizens realize the necessity for a city park in New York.", options: ["did", "was", "did they", "they did"], ans: 0 },
+            { q: "The earth's crust is composed of fifteen plates which float _____ the mantle.", options: ["in", "over", "above", "on"], ans: 3 },
+            { q: "Only rarely _____ earthquakes occur in the middle of a tectonic plate.", options: ["do", "does", "are", "is"], ans: 0 },
+            { q: "_____ the Native Americans of the Southwest used irrigation to grow crops.", options: ["For centuries", "Centuries", "In centuries", "That centuries"], ans: 0 },
+            { q: "A computer is a complex machine _____ millions of electronic components.", options: ["consisted of", "consisting of", "consists of", "which consisting of"], ans: 1 },
+            { q: "By the time a baby has reached his first birthday, he should, without the help of an adult, _____ sit up or even stand up.", options: ["to be able to", "able to", "to be able", "be able to"], ans: 3 },
+            { q: "_____ the formation of the sun, the planets, and other stars began with the condensation of an interstellar cloud.", options: ["It accepted that", "Accepted that", "It is accepted that", "That is accepted"], ans: 2 },
+            { q: "The Apollo 11 astronauts _____ of the Earth's inhabitants witnessed on the famous first moon walk on July 20, 1969.", options: ["whom millions", "millions", "were millions", "millions were"], ans: 0 },
+            { q: "At the end of the nineteenth century, Alfred Binet developed a test for measuring intelligence _____ served as the basis of modern IQ tests.", options: ["has", "it has", "and", "which has"], ans: 3 },
+            { q: "In 1892, the first long-distance telephone line _____ between New York and Chicago.", options: ["was opening", "was opened", "opening", "opened"], ans: 1 },
+            { q: "_____ was argued that the earth is the center of the universe.", options: ["It", "That", "Which", "There"], ans: 0 },
+            { q: "A thick layer of fat called blubber keeps whales warm even _____ coldest water.", options: ["although the", "in the", "the", "of the"], ans: 1 },
+            { q: "_____ the relatively poor climate, agriculture is the mainstay of the country's economy.", options: ["Despite", "Although", "Even", "However"], ans: 0 }
+        ];
+
+        // --- DATA SOAL IELTS (10 Soal: 5 Pilihan Ganda, 5 True/False/Not Given) ---
+        const ieltsData = [
+            { q: "What is the main psychological reason mentioned for why people accept false information?", options: ["The Illusory Truth Effect", "Confirmation Bias", "The Backfire Effect", "Psychological Inoculation"], ans: 1 },
+            { q: "According to Paragraph B, the 'backfire effect' happens when...", options: ["people share news on social media without reading it.", "fact-checking websites make a mistake.", "people strengthen their original beliefs after being presented with contradictory facts.", "individuals search for information that aligns with their views."], ans: 2 },
+            { q: "How do social media algorithms contribute to the spread of misinformation? (Paragraph C)", options: ["By strictly verifying all sources of news.", "By prioritizing dry, factual reporting.", "By randomly showing content to break filter bubbles.", "By prioritizing emotionally charged content to maximize engagement."], ans: 3 },
+            { q: "What does the 'illusory truth effect' refer to?", options: ["The belief that all internet news is true.", "The tendency to believe false information is true after hearing it repeatedly.", "The illusion created by virtual reality platforms.", "The rejection of facts provided by experts."], ans: 1 },
+            { q: "According to Paragraph D, why might a poorly framed factual correction be harmful?", options: ["It might accidentally repeat and reinforce the false claim.", "It costs too much money to produce.", "It takes too long to read.", "It only reaches people who already know the truth."], ans: 0 },
+            { q: "<strong>True / False / Not Given:</strong><br>Misinformation is a completely new phenomenon that only started with the invention of social media.", options: ["True", "False", "Not Given"], ans: 1 }, // False (Paragraph A says historically existed)
+            { q: "<strong>True / False / Not Given:</strong><br>People are naturally inclined to question the validity of information that supports their existing beliefs.", options: ["True", "False", "Not Given"], ans: 1 }, // False
+            { q: "<strong>True / False / Not Given:</strong><br>Social media companies are legally required to remove misinformation within 24 hours.", options: ["True", "False", "Not Given"], ans: 2 }, // Not Given
+            { q: "<strong>True / False / Not Given:</strong><br>Fact-checking corrections usually reach fewer people than the original fake news story.", options: ["True", "False", "Not Given"], ans: 0 }, // True
+            { q: "<strong>True / False / Not Given:</strong><br>'Prebunking' involves explaining the deceptive techniques used in misinformation before or while providing facts.", options: ["True", "False", "Not Given"], ans: 0 } // True
+        ];
+
+        let timerInterval;
+        let timeLeft;
+        let currentTest = '';
+
+        function formatTime(seconds) {
+            const m = Math.floor(seconds / 60);
+            const s = seconds % 60;
+            return `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+        }
+
+        function renderQuestions(data, containerId, prefix) {
+            const container = document.getElementById(containerId);
+            let html = '';
+            data.forEach((item, index) => {
+                html += `<div class="question-box">
+                            <div class="question-text"><span class="question-number">${index + 1}.</span> ${item.q}</div>
+                            <div class="options">`;
+                item.options.forEach((opt, optIndex) => {
+                    html += `<label>
+                                <input type="radio" name="${prefix}_q${index}" value="${optIndex}">
+                                ${opt}
+                             </label>`;
+                });
+                html += `</div></div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        // Inisialisasi render
+        renderQuestions(toeflData, 'toefl-questions', 'toefl');
+        renderQuestions(ieltsData, 'ielts-questions', 'ielts');
+
+        function startTest(type) {
+            document.getElementById('main-menu').style.display = 'none';
+            document.getElementById(type + '-section').classList.add('active');
+            document.getElementById('timer').style.display = 'block';
+            
+            currentTest = type;
+            
+            if(type === 'toefl') {
+                document.getElementById('header-title').innerText = "TOEFL ITP - Structure Test";
+                timeLeft = 25 * 60; // 25 Menit
+            } else {
+                document.getElementById('header-title').innerText = "IELTS Academic - Reading Test";
+                timeLeft = 20 * 60; // 20 Menit
             }
+
+            document.getElementById('time-display').innerText = formatTime(timeLeft);
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('time-display').innerText = formatTime(timeLeft);
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    alert("Waktu Habis! Jawaban Anda akan otomatis disubmit.");
+                    submitTest(currentTest);
+                }
+            }, 1000);
+        }
+
+        function submitTest(type) {
+            clearInterval(timerInterval); // Stop timer
+            
+            let score = 0;
+            let data = type === 'toefl' ? toeflData : ieltsData;
+            
+            // Periksa jawaban
+            data.forEach((item, index) => {
+                let selected = document.querySelector(`input[name="${type}_q${index}"]:checked`);
+                // Highlight jawaban benar dan salah
+                let optionsDiv = document.querySelectorAll(`input[name="${type}_q${index}"]`);
+                
+                optionsDiv.forEach((opt, idx) => {
+                    let label = opt.parentElement;
+                    opt.disabled = true; // Kunci pilihan
+                    if (idx === item.ans) {
+                        label.style.backgroundColor = "#c8e6c9"; // Hijau untuk benar
+                        label.style.borderColor = "#4caf50";
+                        label.style.fontWeight = "bold";
+                    } else if (selected && parseInt(selected.value) === idx && parseInt(selected.value) !== item.ans) {
+                        label.style.backgroundColor = "#ffcdd2"; // Merah untuk salah
+                        label.style.borderColor = "#f44336";
+                    }
+                });
+
+                if (selected && parseInt(selected.value) === item.ans) {
+                    score++;
+                }
+            });
+
+            // Tampilkan hasil
+            const resultDiv = document.getElementById(`${type}-result`);
+            let total = data.length;
+            let percentage = Math.round((score / total) * 100);
+            
+            let feedback = "";
+            if(percentage >= 80) feedback = "Luar Biasa! Pertahankan kerjamu.";
+            else if(percentage >= 60) feedback = "Cukup baik, tapi masih perlu banyak latihan.";
+            else feedback = "Jangan menyerah! Ayo pelajari lagi grammar dan kosakatanya.";
+
+            resultDiv.innerHTML = `Skor Anda: <strong style="color: var(--primary-orange);">${score} / ${total}</strong> (${percentage}%)<br><span style="font-size: 0.7em; color: var(--text-gray);">${feedback}</span>`;
+            resultDiv.classList.add('show');
+            
+            // Sembunyikan tombol submit, munculkan tombol kembali
+            event.target.style.display = 'none';
+            document.getElementById(`${type}-back-btn`).style.display = 'block';
+            document.getElementById('timer').style.display = 'none';
         }
     </script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-</head>
-<body class="bg-[#fcfcfc] dark:bg-zinc-950 text-zinc-800 dark:text-zinc-200 font-sans min-h-screen flex flex-col selection:bg-zinc-900 selection:text-white dark:selection:bg-zinc-100 dark:selection:text-zinc-900 transition-colors duration-500">
-
-    <!-- Navbar -->
-    <header class="bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800/60 sticky top-0 z-50 transition-colors duration-500">
-        <div class="max-w-6xl mx-auto px-6 sm:px-8">
-            <div class="flex items-center justify-between h-20">
-                <!-- Logo -->
-                <div class="flex items-center gap-4 cursor-pointer group" id="logo-nav" onclick="resetApp()">
-                    <div class="w-8 h-8 rounded bg-zinc-900 dark:bg-zinc-100 flex items-center justify-center text-white dark:text-zinc-900 transition-transform duration-500 group-hover:scale-105">
-                        <i class="fas fa-landmark text-sm"></i>
-                    </div>
-                    <div>
-                        <span class="font-serif font-bold text-xl tracking-tight text-zinc-900 dark:text-zinc-100">EduTest Pro.</span>
-                    </div>
-                </div>
-
-                <!-- Utilities -->
-                <div class="flex items-center gap-4" id="utility-nav">
-                    <button id="lang-toggle-btn" onclick="toggleLanguage()" class="text-xs font-semibold tracking-widest uppercase text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors flex items-center gap-2">
-                        <span id="lang-label">ID-EN</span>
-                    </button>
-                    <div class="w-px h-4 bg-zinc-300 dark:bg-zinc-700"></div>
-                    <button id="dark-toggle-btn" onclick="toggleDarkMode()" class="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
-                        <i id="dark-icon" class="fas fa-moon text-sm"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="flex-grow container mx-auto px-4 sm:px-6 py-12 max-w-4xl">
-        
-        <!-- Header Section -->
-        <div class="text-center mb-12" id="main-header">
-            <span class="text-xs font-bold tracking-widest uppercase text-zinc-400 dark:text-zinc-500 mb-4 block" data-i18n="heroPre">Official Assessment Platform</span>
-            <h1 class="text-4xl sm:text-5xl font-serif font-medium text-zinc-900 dark:text-zinc-50 tracking-tight mb-6 leading-tight" data-i18n="heroTitle">
-                Ujian Standar Internasional
-            </h1>
-            <p class="text-base text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed" data-i18n="heroSubtitle">
-                Evaluasi & tingkatkan skor kemampuan Bahasa Inggris Anda dengan format, waktu, dan kisi-kisi soal yang otentik.
-            </p>
-        </div>
-
-        <!-- Elegant Tabs -->
-        <div class="flex justify-center mb-10 overflow-x-auto hide-scrollbar" id="tabs-nav">
-            <div class="inline-flex gap-8 border-b border-zinc-200 dark:border-zinc-800">
-                <button onclick="switchTab('cefr')" id="tab-cefr" class="tab-btn pb-4 text-sm font-medium border-b-2 border-transparent text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 whitespace-nowrap transition-all">
-                    CEFR Level Test
-                </button>
-                <button onclick="switchTab('toefl')" id="tab-toefl" class="tab-btn pb-4 text-sm font-medium border-b-2 border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100 whitespace-nowrap transition-all">
-                    TOEFL iBT Format
-                </button>
-                <button onclick="switchTab('ielts')" id="tab-ielts" class="tab-btn pb-4 text-sm font-medium border-b-2 border-transparent text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 whitespace-nowrap transition-all">
-                    IELTS Academic
-                </button>
-            </div>
-        </div>
-
-        <!-- Confirm Modal (Strict Mode) -->
-        <div id="confirm-modal" class="fixed inset-0 bg-zinc-900/40 dark:bg-black/60 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4 transition-opacity">
-            <div class="bg-white dark:bg-zinc-900 max-w-md w-full p-8 shadow-2xl border border-zinc-200 dark:border-zinc-800 transform scale-95 transition-transform duration-300" id="confirm-modal-box">
-                <div class="text-center">
-                    <i class="fas fa-lock text-3xl text-zinc-800 dark:text-zinc-200 mb-6"></i>
-                    <h3 class="text-2xl font-serif font-medium text-zinc-900 dark:text-white mb-3" data-i18n="confirmTitle">Konfirmasi Ujian</h3>
-                    <p class="text-sm text-zinc-600 dark:text-zinc-400 mb-8 leading-relaxed" data-i18n="confirmDesc">Ujian ini bersifat tertutup (strict). Setelah dimulai, ujian tidak dapat dibatalkan, dijeda, atau ditutup hingga Anda menyelesaikannya secara penuh.</p>
-                    <div class="flex flex-col-reverse sm:flex-row gap-3">
-                        <button onclick="closeConfirmModal()" class="flex-1 px-5 py-3 border border-zinc-200 dark:border-zinc-700 bg-transparent hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300 font-medium text-sm transition-colors" data-i18n="cancelBtn">Batal</button>
-                        <button onclick="startTestConfirmed()" class="flex-1 px-5 py-3 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-black dark:hover:bg-white font-medium text-sm transition-colors" data-i18n="confirmBtn">Mulai Ujian</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Main Card Area -->
-        <div id="test-container" class="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800/80 p-8 sm:p-12 shadow-sm transition-colors duration-500">
-            
-            <!-- SCREEN 1: Welcome -->
-            <div id="welcome-screen" class="text-center py-6">
-                <div class="mb-8">
-                    <i id="test-icon" class="fas fa-globe-americas text-4xl text-zinc-800 dark:text-zinc-200 opacity-80"></i>
-                </div>
-                <h2 class="text-3xl sm:text-4xl font-serif font-medium text-zinc-900 dark:text-white mb-6" id="test-title">TOEFL iBT</h2>
-                
-                <div class="flex flex-wrap justify-center gap-6 mb-8">
-                    <div class="flex flex-col items-center">
-                        <span class="text-2xl font-light text-zinc-900 dark:text-zinc-100" id="test-total-q">0</span>
-                        <span class="text-xs font-bold tracking-widest uppercase text-zinc-400" data-i18n="questionsCount">Soal</span>
-                    </div>
-                    <div class="w-px bg-zinc-200 dark:bg-zinc-800"></div>
-                    <div class="flex flex-col items-center">
-                        <span class="text-2xl font-light text-zinc-900 dark:text-zinc-100" id="test-time-limit">0</span>
-                        <span class="text-xs font-bold tracking-widest uppercase text-zinc-400" data-i18n="minutesCount">Menit</span>
-                    </div>
-                </div>
-
-                <div class="text-left bg-zinc-50 dark:bg-zinc-900/50 p-6 sm:p-8 border border-zinc-100 dark:border-zinc-800 text-zinc-600 dark:text-zinc-300 text-sm leading-relaxed mb-8 font-serif" id="test-desc"></div>
-                
-                <div class="text-left border-l-2 border-zinc-400 dark:border-zinc-500 pl-4 mb-10">
-                    <p class="text-xs text-zinc-500 dark:text-zinc-400 font-medium tracking-wide uppercase" data-i18n="testNotice">
-                        Mode Ujian Ketat Diaktifkan. Jangan tutup halaman saat ujian berlangsung.
-                    </p>
-                </div>
-                
-                <button onclick="openConfirmModal()" class="bg-zinc-900 dark:bg-zinc-100 hover:bg-black dark:hover:bg-white text-white dark:text-zinc-900 font-medium py-4 px-12 transition-all duration-300 flex items-center justify-center mx-auto gap-3 text-sm tracking-wider uppercase">
-                    <span data-i18n="startBtn">Mulai Ujian</span> <i class="fas fa-arrow-right text-xs"></i>
-                </button>
-            </div>
-
-            <!-- SCREEN 2: Quiz -->
-            <div id="quiz-screen" class="hidden">
-                <!-- Quiz Header -->
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-6 mb-8 border-b border-zinc-200 dark:border-zinc-800 gap-4">
-                    <div>
-                        <span id="section-badge" class="text-xs font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400 block mb-1">READING</span>
-                        <span class="text-sm font-serif text-zinc-900 dark:text-zinc-100">
-                            <span data-i18n="question">Question</span> <span id="current-q" class="font-medium">1</span> of <span id="total-q">10</span>
-                        </span>
-                    </div>
-                    <div class="flex items-center gap-4 w-full sm:w-auto justify-between border-t border-zinc-100 dark:border-zinc-800 sm:border-0 pt-4 sm:pt-0">
-                        <button onclick="toggleGridPalette()" class="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 text-xs font-bold tracking-widest uppercase transition-colors flex items-center gap-2">
-                            <i class="fas fa-th-large"></i> <span data-i18n="gridBtn">Navigasi</span>
-                        </button>
-                        <div class="flex items-center gap-2 text-zinc-900 dark:text-zinc-100 font-mono text-base tracking-wider">
-                            <i class="far fa-clock text-zinc-400"></i> <span id="timer">00:00:00</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Grid Palette -->
-                <div id="grid-palette" class="hidden mb-8 p-6 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 max-h-64 overflow-y-auto">
-                    <div class="flex items-center justify-between mb-4 pb-3 border-b border-zinc-200 dark:border-zinc-800">
-                        <span class="text-xs font-bold tracking-widest uppercase text-zinc-500" data-i18n="questionPalette">Peta Soal</span>
-                        <button onclick="toggleGridPalette()" class="text-zinc-400 hover:text-zinc-900 text-xs uppercase tracking-wider font-bold"><i class="fas fa-times"></i> Tutup</button>
-                    </div>
-                    <div id="grid-buttons-container" class="grid grid-cols-6 sm:grid-cols-12 gap-2"></div>
-                </div>
-
-                <!-- Audio Section -->
-                <div id="audio-container" class="hidden mb-8 bg-zinc-50 dark:bg-zinc-900/50 p-6 sm:p-8 border border-zinc-200 dark:border-zinc-800">
-                    <div class="flex items-center gap-4 mb-6 pb-4 border-b border-zinc-200 dark:border-zinc-800/50">
-                        <i class="fas fa-headphones-alt text-2xl text-zinc-400"></i>
-                        <div>
-                            <h4 class="font-serif font-medium text-zinc-900 dark:text-white text-lg" data-i18n="listeningAudio">Listening Section</h4>
-                            <p class="text-xs tracking-wide uppercase text-zinc-500 mt-1" data-i18n="audioInstruct">Dengarkan klip suara berikut</p>
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap items-center gap-3 mb-4">
-                        <button id="play-audio-btn" onclick="playQuestionSpeech()" class="px-5 py-2.5 bg-zinc-900 hover:bg-black dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-2">
-                            <i id="play-audio-icon" class="fas fa-play"></i> <span id="play-audio-label">Putar Audio</span>
-                        </button>
-                        <button onclick="stopQuestionSpeech()" class="px-4 py-2.5 border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-xs transition-colors">
-                            <i class="fas fa-stop"></i>
-                        </button>
-                    </div>
-                    <details class="group">
-                        <summary class="cursor-pointer text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors list-none flex items-center gap-2">
-                            <i class="fas fa-chevron-down group-open:rotate-180 transition-transform"></i> <span data-i18n="showTranscript">Transkrip Teks</span>
-                        </summary>
-                        <div id="audio-transcript-text" class="mt-4 p-5 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 font-serif leading-relaxed text-sm text-zinc-700 dark:text-zinc-300"></div>
-                    </details>
-                </div>
-
-                <!-- Reading Section -->
-                <div id="reading-container" class="hidden mb-10 bg-zinc-50 dark:bg-zinc-900/40 p-6 sm:p-10 border border-zinc-200 dark:border-zinc-800 max-h-96 overflow-y-auto custom-scroll">
-                    <h3 class="font-serif font-medium text-xl sm:text-2xl text-zinc-900 dark:text-white mb-6 pb-4 border-b border-zinc-200 dark:border-zinc-800" id="passage-title">
-                        Reading Passage
-                    </h3>
-                    <div id="passage-text" class="font-serif text-zinc-700 dark:text-zinc-300 text-base leading-loose space-y-4"></div>
-                </div>
-
-                <!-- Question Area -->
-                <div class="min-h-[200px]">
-                    <div class="mb-8">
-                        <h3 id="question-text" class="text-xl sm:text-2xl font-serif text-zinc-900 dark:text-white leading-snug">Loading question...</h3>
-                    </div>
-                    <div id="options-container" class="space-y-1"></div>
-                </div>
-
-                <!-- Footer Nav -->
-                <div class="mt-12 pt-8 border-t border-zinc-200 dark:border-zinc-800 flex justify-between items-center">
-                    <button id="prev-btn" onclick="prevQuestion()" class="px-6 py-3 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-900 text-zinc-600 dark:text-zinc-300 text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-3">
-                        <i class="fas fa-arrow-left text-xs"></i> <span data-i18n="prevBtn">Kembali</span>
-                    </button>
-                    <div class="ml-auto">
-                        <button id="next-btn" onclick="nextQuestion()" class="px-8 py-3 bg-zinc-900 hover:bg-black dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-3">
-                            <span data-i18n="nextBtn">Lanjut</span> <i class="fas fa-arrow-right text-xs"></i>
-                        </button>
-                        <button id="submit-btn" onclick="finishTest()" class="hidden px-8 py-3 bg-zinc-900 hover:bg-black dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-3">
-                            <span data-i18n="finishBtn">Selesai</span> <i class="fas fa-check text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SCREEN 3: Result -->
-            <div id="result-screen" class="hidden text-center py-10">
-                <div class="mb-10">
-                    <i class="fas fa-award text-4xl text-zinc-300 dark:text-zinc-600 mb-6 block"></i>
-                    <h2 class="text-3xl sm:text-4xl font-serif font-medium text-zinc-900 dark:text-white mb-2" data-i18n="resultTitle">Official Test Report</h2>
-                </div>
-                
-                <div class="border border-zinc-200 dark:border-zinc-800 p-10 mb-12 bg-zinc-50 dark:bg-zinc-900/50">
-                    <span class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-4 block" data-i18n="overallEval">Assessment Score</span>
-                    <div class="text-5xl sm:text-6xl font-serif font-medium text-zinc-900 dark:text-white mb-6" id="final-score-main">Finished</div>
-                    <div class="w-12 h-px bg-zinc-300 dark:bg-zinc-700 mx-auto mb-6"></div>
-                    <p class="text-sm text-zinc-600 dark:text-zinc-400 max-w-md mx-auto leading-relaxed font-serif" id="score-description"></p>
-                </div>
-                
-                <button onclick="resetApp()" class="px-8 py-4 border border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-900 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-zinc-900 text-xs font-bold uppercase tracking-widest transition-colors" data-i18n="backBtn">
-                    Kembali ke Beranda
-                </button>
-            </div>
-        </div>
-    </main>
-
-    <footer class="py-8 mt-auto text-center transition-colors duration-500">
-        <p class="text-xs font-medium tracking-widest uppercase text-zinc-400 dark:text-zinc-600 font-serif">&copy; 2026 EduTest Pro Assessment. Elegant Edition.</p>
-    </footer>
-
-    <script src="test-data.js"></script>
-    <script src="script.js"></script>
 </body>
 </html>
