@@ -1,224 +1,339 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduTest Pro - Simulasi Ujian Bahasa Inggris</title>
-    <!-- Tailwind CSS for styling -->
+    <title>EduTest Pro - Standardized English Test Platform</title>
+    <!-- Tailwind CSS with Dark Mode Class support -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <!-- FontAwesome for Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
-    <!-- Navbar -->
-    <nav class="bg-blue-600 text-white shadow-lg sticky top-0 z-50">
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans min-h-screen flex flex-col transition-colors duration-300">
+
+    <!-- Header / Navbar -->
+    <header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <div class="flex items-center gap-3">
-                    <i class="fas fa-graduation-cap text-2xl"></i>
-                    <span class="font-bold text-xl tracking-tight">EduTest Pro</span>
-                </div>
-                <div class="hidden md:block">
-                    <span class="text-blue-100 text-sm font-medium">Advanced English Simulation Platform</span>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="flex-grow container mx-auto px-4 py-8 max-w-5xl">
-        <!-- Header -->
-        <div class="text-center mb-10" id="main-header">
-            <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Simulasi Ujian Standar Internasional</h1>
-            <p class="text-lg text-slate-600 max-w-2xl mx-auto">Persiapkan diri Anda untuk sertifikasi resmi dengan simulasi komprehensif, standar waktu, dan format soal yang otentik.</p>
-        </div>
-
-        <!-- Tabs Navigation -->
-        <div class="flex justify-center mb-8 border-b border-slate-200" id="tabs-nav">
-            <button onclick="switchTab('cefr')" id="tab-cefr" class="tab-btn px-4 py-3 sm:px-6 text-blue-600 font-semibold border-b-2 border-blue-600 focus:outline-none transition-colors">
-                <i class="fas fa-layer-group mr-2"></i> CEFR Level Test
-            </button>
-            <button onclick="switchTab('toefl')" id="tab-toefl" class="tab-btn px-4 py-3 sm:px-6 text-slate-500 hover:text-blue-600 font-semibold focus:outline-none transition-colors">
-                <i class="fas fa-globe-americas mr-2"></i> TOEFL iBT Simulasi
-            </button>
-            <button onclick="switchTab('ielts')" id="tab-ielts" class="tab-btn px-4 py-3 sm:px-6 text-slate-500 hover:text-blue-600 font-semibold focus:outline-none transition-colors">
-                <i class="fas fa-globe-europe mr-2"></i> IELTS Academic
-            </button>
-        </div>
-
-        <!-- Test Container -->
-        <div id="test-container" class="bg-white rounded-xl shadow-md border border-slate-100 p-6 md:p-8">
-            
-            <!-- Screen 1: Welcome/Info -->
-            <div id="welcome-screen" class="text-center py-6">
-                <div class="inline-flex justify-center items-center w-20 h-20 rounded-full bg-blue-100 mb-6">
-                    <i id="test-icon" class="fas fa-book-open text-3xl text-blue-600"></i>
-                </div>
-                <h2 class="text-3xl font-bold text-slate-800 mb-3" id="test-title">CEFR Placement Test</h2>
                 
-                <div class="flex flex-wrap justify-center gap-4 mb-6 text-sm font-medium">
-                    <span class="bg-slate-100 text-slate-600 px-4 py-2 rounded-full"><i class="fas fa-list-ol mr-2"></i><span id="test-total-q">50</span> Soal</span>
-                    <span class="bg-slate-100 text-slate-600 px-4 py-2 rounded-full"><i class="far fa-clock mr-2"></i><span id="test-time-limit">60</span> Menit</span>
-                </div>
-
-                <p class="text-slate-600 mb-8 max-w-3xl mx-auto leading-relaxed text-left p-4 bg-blue-50/50 rounded-lg border border-blue-100" id="test-desc">
-                    Tes ini dirancang untuk...
-                </p>
-                
-                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8 text-left max-w-3xl mx-auto">
-                    <div class="flex">
-                        <div class="flex-shrink-0">
-                            <i class="fas fa-exclamation-triangle text-yellow-500"></i>
-                        </div>
-                        <div class="ml-3">
-                            <p class="text-sm text-yellow-700 font-medium">
-                                Perhatian: Pastikan Anda menggunakan earphone/headphone untuk sesi Listening dan berada di ruangan yang tenang. Waktu tidak dapat dihentikan (pause) setelah dimulai.
-                            </p>
-                        </div>
+                <!-- Logo -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="resetApp()">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+                        <i class="fas fa-graduation-cap text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">EduTest Pro</span>
+                        <span class="hidden sm:inline-block text-[10px] uppercase tracking-wider font-bold bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded-full ml-2">v2.0 Advanced</span>
                     </div>
                 </div>
 
-                <button onclick="startTest()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-xl transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center mx-auto gap-3 text-lg">
-                    Mulai Simulasi <i class="fas fa-play"></i>
+                <!-- Right Utility Bar (Language + Dark Mode) -->
+                <div class="flex items-center gap-3">
+                    
+                    <!-- Language Selector Toggle -->
+                    <button id="lang-toggle-btn" onclick="toggleLanguage()" class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100/80 dark:bg-slate-800/80 text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+                        <i class="fas fa-globe text-blue-500"></i>
+                        <span id="lang-label">ID | EN</span>
+                    </button>
+
+                    <!-- Dark Mode Toggle Button -->
+                    <button id="dark-toggle-btn" onclick="toggleDarkMode()" class="w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100/80 dark:bg-slate-800/80 flex items-center justify-center text-slate-700 dark:text-amber-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+                        <i id="dark-icon" class="fas fa-moon"></i>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-5xl">
+        
+        <!-- Hero Header -->
+        <div class="text-center mb-8" id="main-header">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3" data-i18n="heroTitle">
+                Simulasi Ujian Standar Internasional
+            </h1>
+            <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto" data-i18n="heroSubtitle">
+                Evaluasi & tingkatkan skor kemampuan Bahasa Inggris Anda dengan format, waktu, dan kisi-kisi soal yang otentik.
+            </p>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="flex justify-center mb-8 border-b border-slate-200 dark:border-slate-800 overflow-x-auto" id="tabs-nav">
+            <button onclick="switchTab('cefr')" id="tab-cefr" class="tab-btn flex items-center gap-2 px-5 py-3 font-semibold text-sm border-b-2 border-blue-600 text-blue-600 dark:text-blue-400 whitespace-nowrap transition">
+                <i class="fas fa-layer-group"></i> CEFR Level Test
+            </button>
+            <button onclick="switchTab('toefl')" id="tab-toefl" class="tab-btn flex items-center gap-2 px-5 py-3 font-semibold text-sm border-b-2 border-transparent text-slate-500 dark:text-slate-400 hover:text-blue-600 whitespace-nowrap transition">
+                <i class="fas fa-globe-americas"></i> TOEFL iBT Simulation
+            </button>
+            <button onclick="switchTab('ielts')" id="tab-ielts" class="tab-btn flex items-center gap-2 px-5 py-3 font-semibold text-sm border-b-2 border-transparent text-slate-500 dark:text-slate-400 hover:text-blue-600 whitespace-nowrap transition">
+                <i class="fas fa-globe-europe"></i> IELTS Academic
+            </button>
+        </div>
+
+        <!-- Card Wrapper -->
+        <div id="test-container" class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-200/80 dark:border-slate-800 p-6 sm:p-8 transition-colors duration-300">
+            
+            <!-- SCREEN 1: Welcome / Pre-Test Info -->
+            <div id="welcome-screen" class="text-center py-4">
+                
+                <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-900 mb-6 shadow-inner">
+                    <i id="test-icon" class="fas fa-layer-group text-3xl"></i>
+                </div>
+                
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-4" id="test-title">
+                    CEFR Placement Test
+                </h2>
+                
+                <!-- Quick Meta Stats -->
+                <div class="flex flex-wrap justify-center gap-3 sm:gap-4 mb-6">
+                    <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold border border-slate-200 dark:border-slate-700">
+                        <i class="fas fa-list-ol text-blue-500"></i> <span id="test-total-q">0</span> <span data-i18n="questionsCount">Soal</span>
+                    </span>
+                    <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold border border-slate-200 dark:border-slate-700">
+                        <i class="far fa-clock text-blue-500"></i> <span id="test-time-limit">0</span> <span data-i18n="minutesCount">Menit</span>
+                    </span>
+                    <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-semibold border border-slate-200 dark:border-slate-700">
+                        <i class="fas fa-volume-up text-blue-500"></i> Audio TTS
+                    </span>
+                </div>
+
+                <!-- Complete Test Description (Fixed Cut-off Text) -->
+                <div class="text-left bg-gradient-to-br from-slate-50 to-blue-50/30 dark:from-slate-800/50 dark:to-slate-900/50 p-5 sm:p-6 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-6" id="test-desc">
+                    <!-- Injected dynamically via JS -->
+                </div>
+
+                <!-- Warning Alert Box -->
+                <div class="text-left bg-amber-50 dark:bg-amber-950/40 border-l-4 border-amber-500 p-4 rounded-r-xl mb-8">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-triangle-exclamation text-amber-600 dark:text-amber-400 text-lg mt-0.5"></i>
+                        <p class="text-xs sm:text-sm text-amber-800 dark:text-amber-200 font-medium leading-relaxed" data-i18n="testNotice">
+                            Perhatian: Disarankan menggunakan earphone/headphone untuk sesi Listening. Timer berjalan terus begitu Anda menekan tombol mulai.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Start Button -->
+                <button onclick="startTest()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-4 px-10 rounded-xl transition duration-300 shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/35 transform hover:-translate-y-0.5 flex items-center justify-center mx-auto gap-3 text-base sm:text-lg">
+                    <span data-i18n="startBtn">Mulai Simulasi</span> <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
 
-            <!-- Screen 2: Active Quiz -->
+            <!-- SCREEN 2: Active Test View -->
             <div id="quiz-screen" class="hidden">
-                <div class="flex flex-col sm:flex-row justify-between items-center mb-6 pb-4 border-b border-slate-200 gap-4">
-                    <div class="flex items-center gap-4 w-full sm:w-auto">
-                        <span class="text-sm font-semibold text-slate-600 bg-slate-100 px-4 py-2 rounded-lg border border-slate-200 shadow-sm w-full sm:w-auto text-center">
-                            Bagian: <span id="section-name" class="text-blue-600 font-bold uppercase">Reading</span>
-                        </span>
-                        <span class="text-sm font-semibold text-slate-600 bg-slate-100 px-4 py-2 rounded-lg border border-slate-200 shadow-sm w-full sm:w-auto text-center">
-                            Soal <span id="current-q" class="font-bold">1</span> / <span id="total-q">10</span>
-                        </span>
-                    </div>
-                    
-                    <div class="w-full sm:w-auto bg-blue-50 px-5 py-2 rounded-lg border-2 border-blue-200 shadow-sm flex items-center justify-center sm:justify-start gap-2" id="timer-container">
-                        <i class="fas fa-stopwatch text-blue-600 text-lg"></i>
-                        <span class="text-lg font-mono font-bold text-blue-700" id="timer">00:00:00</span>
-                    </div>
-                </div>
                 
-                <!-- Audio Player (Hidden by default) -->
-                <div id="audio-container" class="hidden mb-6 bg-slate-50 p-4 rounded-xl border border-slate-200 shadow-inner">
-                    <div class="flex items-center gap-3 mb-2">
-                        <i class="fas fa-headphones text-blue-500 text-xl"></i>
-                        <h3 class="font-semibold text-slate-700">Listening Passage</h3>
-                        <span class="text-xs font-bold text-white bg-red-500 px-2 py-1 rounded ml-auto animate-pulse">PLAYING ONCE</span>
+                <!-- Status TopBar -->
+                <div class="flex flex-col sm:flex-row justify-between items-center pb-4 mb-6 border-b border-slate-200 dark:border-slate-800 gap-3">
+                    <div class="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-between sm:justify-start">
+                        <span id="section-badge" class="text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+                            READING
+                        </span>
+                        <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">
+                            <span data-i18n="question">Soal</span> <span id="current-q" class="font-bold text-slate-800 dark:text-white">1</span> / <span id="total-q">10</span>
+                        </span>
                     </div>
-                    <!-- Mock Audio Player UI -->
-                    <div class="w-full bg-slate-200 rounded-full h-2.5 mb-2 mt-4 relative overflow-hidden">
-                        <div id="audio-progress" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
-                    </div>
-                    <div class="flex justify-between text-xs text-slate-500 font-mono">
-                        <span id="audio-time">00:00</span>
-                        <span>01:45</span>
-                    </div>
-                    <p class="text-sm text-slate-500 mt-3 italic"><i class="fas fa-info-circle mr-1"></i> Audio hanya diputar satu kali. (Simulasi: Teks audio ditampilkan di bawah)</p>
-                    <div id="audio-transcript-mock" class="mt-3 p-3 bg-white border border-slate-200 rounded text-sm text-slate-600 h-24 overflow-y-auto hidden">
-                        [Transcript Audio muncul di sini untuk keperluan demo/latihan]
+
+                    <div class="flex items-center gap-3 w-full sm:w-auto justify-between">
+                        <!-- Question Grid Drawer Toggle Button -->
+                        <button onclick="toggleGridPalette()" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition flex items-center gap-1.5">
+                            <i class="fas fa-th"></i> <span data-i18n="gridBtn">Peta Soal</span>
+                        </button>
+
+                        <!-- Stopwatch / Timer -->
+                        <div class="flex items-center gap-2 px-4 py-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-sm font-mono font-bold">
+                            <i class="far fa-clock"></i>
+                            <span id="timer">00:00:00</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Reading Passage (Hidden by default) -->
-                <div id="reading-container" class="hidden mb-6 bg-slate-50 p-5 rounded-xl border border-slate-200 shadow-inner h-64 overflow-y-auto">
-                    <h3 class="font-bold text-slate-800 mb-3 text-lg" id="passage-title">Reading Passage</h3>
-                    <div id="passage-text" class="text-slate-700 leading-relaxed space-y-4 text-justify">
-                        <!-- Passage injected here -->
+                <!-- Grid Palette Modal Drawer (Hidden by default) -->
+                <div id="grid-palette" class="hidden mb-6 p-4 bg-slate-50 dark:bg-slate-800/80 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider" data-i18n="questionPalette">Navigasi Soal</span>
+                        <button onclick="toggleGridPalette()" class="text-slate-400 hover:text-slate-600 text-xs"><i class="fas fa-times"></i> Tutup</button>
+                    </div>
+                    <div id="grid-buttons-container" class="grid grid-cols-5 sm:grid-cols-10 gap-2">
+                        <!-- Grid items inserted here -->
                     </div>
                 </div>
 
-                <div class="min-h-[250px] mt-4">
-                    <div class="flex gap-3 mb-6">
-                        <span id="q-number-badge" class="bg-blue-600 text-white font-bold h-8 w-8 flex-shrink-0 flex items-center justify-center rounded-full">1</span>
-                        <div id="question-text" class="text-lg font-medium text-slate-800 leading-relaxed pt-1"></div>
+                <!-- Listening Audio Player Card (Web Audio / SpeechSynthesis) -->
+                <div id="audio-container" class="hidden mb-6 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-850 p-5 rounded-2xl border border-blue-100 dark:border-slate-700 shadow-sm">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center">
+                                <i class="fas fa-headphones"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white text-sm" data-i18n="listeningAudio">Listening Audio Section</h4>
+                                <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="audioInstruct">Dengarkan klip suara Bahasa Inggris di bawah ini dengan seksama.</p>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div id="options-container" class="space-y-3 pl-11">
+                    <!-- Speech Controls -->
+                    <div class="flex flex-wrap items-center gap-3 bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <button id="play-audio-btn" onclick="playQuestionSpeech()" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-2 shadow transition">
+                            <i id="play-audio-icon" class="fas fa-play"></i> <span id="play-audio-label">Putar Audio</span>
+                        </button>
+                        <button onclick="stopQuestionSpeech()" class="px-3 py-2 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-300 transition">
+                            <i class="fas fa-stop"></i>
+                        </button>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 italic ml-auto flex items-center gap-1">
+                            <i class="fas fa-volume-up text-blue-500"></i> AI Native Voice Speech
+                        </div>
+                    </div>
+
+                    <!-- Transcript Collapsible -->
+                    <details class="mt-3 text-xs text-slate-600 dark:text-slate-400">
+                        <summary class="cursor-pointer font-semibold hover:text-blue-600" data-i18n="showTranscript">Tampilkan Transkrip Teks (Bantuan Latihan)</summary>
+                        <div id="audio-transcript-text" class="mt-2 p-3 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 font-serif leading-relaxed">
+                            <!-- Transcript text -->
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Reading Passage Box -->
+                <div id="reading-container" class="hidden mb-6 bg-slate-50 dark:bg-slate-800/60 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 max-h-72 overflow-y-auto">
+                    <h3 class="font-bold text-slate-900 dark:text-white text-base mb-2 flex items-center gap-2" id="passage-title">
+                        <i class="fas fa-book-open text-blue-500"></i> Reading Passage
+                    </h3>
+                    <div id="passage-text" class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed space-y-3">
+                        <!-- Reading passage content -->
+                    </div>
+                </div>
+
+                <!-- Question Area -->
+                <div class="min-h-[220px]">
+                    <div class="flex items-start gap-3 mb-6">
+                        <span id="q-number-badge" class="bg-blue-600 text-white font-bold h-7 w-7 rounded-lg text-sm flex items-center justify-center flex-shrink-0 mt-0.5">
+                            1
+                        </span>
+                        <h3 id="question-text" class="text-base sm:text-lg font-semibold text-slate-900 dark:text-white leading-relaxed">
+                            Loading question...
+                        </h3>
+                    </div>
+
+                    <div id="options-container" class="space-y-3 sm:pl-10">
                         <!-- Options injected via JavaScript -->
                     </div>
                 </div>
 
-                <div class="mt-8 flex justify-between items-center border-t border-slate-100 pt-6">
-                    <button id="prev-btn" onclick="prevQuestion()" class="hidden bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold py-2 px-6 rounded-lg transition duration-300">
-                        <i class="fas fa-chevron-left mr-1"></i> Sebelumnya
+                <!-- Footer Navigation Buttons -->
+                <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center">
+                    <button id="prev-btn" onclick="prevQuestion()" class="px-5 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold text-sm transition flex items-center gap-2">
+                        <i class="fas fa-chevron-left"></i> <span data-i18n="prevBtn">Sebelumnya</span>
                     </button>
+
                     <div class="ml-auto">
-                        <button id="next-btn" onclick="nextQuestion()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-8 rounded-lg transition duration-300 shadow-md">
-                            Selanjutnya <i class="fas fa-chevron-right ml-1"></i>
+                        <button id="next-btn" onclick="nextQuestion()" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm transition shadow-md flex items-center gap-2">
+                            <span data-i18n="nextBtn">Selanjutnya</span> <i class="fas fa-chevron-right"></i>
                         </button>
-                        <button id="submit-btn" onclick="finishTest()" class="hidden bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-8 rounded-lg transition duration-300 shadow-md">
-                            Selesaikan Ujian <i class="fas fa-flag-checkered ml-2"></i>
+                        <button id="submit-btn" onclick="finishTest()" class="hidden px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm transition shadow-md flex items-center gap-2">
+                            <span data-i18n="finishBtn">Selesaikan Ujian</span> <i class="fas fa-check-circle"></i>
                         </button>
                     </div>
                 </div>
+
             </div>
 
-            <!-- Screen 3: Results & Review -->
-            <div id="result-screen" class="hidden py-4">
-                <div class="text-center mb-10">
-                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 mb-4 border-4 border-green-200">
-                        <i class="fas fa-certificate text-4xl text-green-600"></i>
-                    </div>
-                    <h2 class="text-3xl font-extrabold text-slate-800 mb-2">Test Report</h2>
-                    <p class="text-slate-600" id="result-date">Terselesaikan pada: </p>
-                </div>
+            <!-- SCREEN 3: Test Report & Answer Review -->
+            <div id="result-screen" class="hidden">
                 
-                <!-- Score Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10" id="score-cards">
-                    <!-- Cards injected via JS based on test type -->
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 mb-4 shadow-sm">
+                        <i class="fas fa-award text-4xl"></i>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mb-1" data-i18n="resultTitle">
+                        Hasil Laporan Ujian
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400" id="result-date">
+                        Terselesaikan pada: -
+                    </p>
                 </div>
 
-                <!-- Overall Level / Band -->
-                <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-8 text-center text-white shadow-xl mb-12">
-                    <h3 class="text-blue-100 font-semibold mb-2 uppercase tracking-widest text-sm">Overall Assessment</h3>
-                    <div class="text-5xl font-black mb-4" id="final-score-main">C1 Advanced</div>
-                    <p class="text-blue-100 max-w-2xl mx-auto" id="score-description">Anda memiliki pemahaman bahasa Inggris tingkat lanjut yang sangat baik, setara dengan standar akademik internasional.</p>
+                <!-- Grid Summary Score Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8" id="score-cards">
+                    <!-- Dynamic score cards -->
                 </div>
-                
-                <!-- Answer Review Section -->
-                <div class="mb-8">
-                    <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center border-b pb-2">
-                        <i class="fas fa-clipboard-check text-blue-600 mr-3"></i> Kunci Jawaban & Pembahasan
-                    </h3>
-                    <p class="text-slate-600 mb-6 bg-blue-50 p-4 rounded-lg border border-blue-100">
-                        Gunakan pembahasan di bawah ini sebagai bahan evaluasi belajar Anda.
+
+                <!-- Main Level / Band Banner -->
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-700 dark:from-blue-700 dark:to-indigo-800 rounded-2xl p-6 sm:p-8 text-center text-white shadow-xl shadow-blue-500/10 mb-10">
+                    <span class="text-xs font-bold uppercase tracking-widest text-blue-200 mb-2 block" data-i18n="overallEval">Evaluasi Tingkat Kemampuan</span>
+                    <div class="text-4xl sm:text-5xl font-black mb-3" id="final-score-main">C1 Advanced</div>
+                    <p class="text-xs sm:text-sm text-blue-100 max-w-xl mx-auto leading-relaxed" id="score-description">
+                        Deskripsi tingkat kemampuan.
                     </p>
-                    
-                    <!-- Section Filter for Review -->
-                    <div class="flex flex-wrap gap-2 mb-6" id="review-filters">
-                        <!-- Filters injected via JS -->
+                </div>
+
+                <!-- Review Section -->
+                <div class="mb-8">
+                    <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3 mb-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                            <i class="fas fa-clipboard-check text-blue-500"></i> <span data-i18n="reviewTitle">Pembahasan & Koreksi Soal</span>
+                        </h3>
                     </div>
 
                     <div id="review-container" class="space-y-6">
-                        <!-- Review items injected via JS -->
+                        <!-- Detailed review items -->
                     </div>
                 </div>
-                
-                <div class="flex justify-center border-t border-slate-200 pt-8 mt-8">
-                    <button onclick="resetApp()" class="bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-10 rounded-xl transition duration-300 shadow-lg">
-                        <i class="fas fa-home mr-2"></i> Kembali ke Menu Utama
+
+                <!-- Back to Menu -->
+                <div class="text-center pt-6 border-t border-slate-200 dark:border-slate-800">
+                    <button onclick="resetApp()" class="px-8 py-3 rounded-xl bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-bold text-sm hover:opacity-90 transition shadow-lg flex items-center justify-center mx-auto gap-2">
+                        <i class="fas fa-redo"></i> <span data-i18n="retryBtn">Coba Ujian Lain</span>
                     </button>
                 </div>
+
             </div>
-            
+
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-8 mt-auto">
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 mt-auto transition-colors duration-300">
         <div class="container mx-auto px-4 text-center">
-            <p class="font-semibold text-slate-300">&copy; 2026 EduTest Pro Advanced.</p>
-            <p class="text-sm mt-2 max-w-2xl mx-auto text-slate-500">Platform ini dirancang khusus untuk simulasi latihan mandiri. Format, waktu, dan penilaian dibuat semirip mungkin dengan standar CEFR, ETS (TOEFL), dan Cambridge (IELTS) untuk keperluan persiapan sertifikasi.</p>
+            <p class="text-xs font-semibold text-slate-600 dark:text-slate-400">
+                &copy; 2026 EduTest Pro Assessment. All rights reserved.
+            </p>
+            <p class="text-[11px] text-slate-400 dark:text-slate-500 mt-1" data-i18n="footerSub">
+                Dirancang untuk simulasi mandiri persiapan sertifikasi resmi CEFR, TOEFL iBT, dan IELTS Academic.
+            </p>
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="test-data.js"></script>
     <script src="script.js"></script>
 </body>

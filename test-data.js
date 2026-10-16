@@ -1,146 +1,248 @@
-// test-data.js
-// Data soal simulasi komprehensif
+// test-data.js - EduTest Pro v2.0 Data Warehouse
 
 const db = {
     cefr: {
         id: "cefr",
-        title: "CEFR Level Assessment",
+        title: "CEFR Placement Test",
         icon: "fa-layer-group",
-        timeLimit: 30 * 60, // 30 Menit untuk versi web (Aslinya ~50 menit)
-        desc: "Tes ini mengukur level bahasa Inggris umum Anda berdasarkan standar <b>Common European Framework of Reference for Languages (CEFR)</b> dari A1 (Beginner) hingga C2 (Proficient).<br><br><b>Format Tes:</b><br>• Grammar & Vocabulary (30 Soal)<br>• Reading Comprehension (10 Soal)",
+        timeLimit: 30 * 60, // 30 mins
+        desc: {
+            id: "Tes ini dirancang khusus untuk mengukur tingkat kemahiran Bahasa Inggris umum Anda berdasarkan kerangka standar internasional <b>CEFR (Common European Framework of Reference for Languages)</b>. Hasil evaluasi mencakup skala level dari <b>A1 (Beginner)</b>, <b>A2 (Elementary)</b>, <b>B1 (Intermediate)</b>, <b>B2 (Upper-Intermediate)</b>, <b>C1 (Advanced)</b>, hingga <b>C2 (Proficient/Mastery)</b>.<br><br><b>Cakupan Materi:</b><br>• Tatabahasa & Kosakata Akademik (Grammar & Vocabulary)<br>• Pemahaman Bacaan Teks (Reading Comprehension)<br>• Kunci Jawaban Lengkap dengan Analisis Pembahasan Tatabahasa.",
+            en: "This test is specifically designed to assess your general English proficiency based on the international standard framework <b>CEFR (Common European Framework of Reference for Languages)</b>. The evaluation covers levels from <b>A1 (Beginner)</b> up to <b>C2 (Proficient)</b>.<br><br><b>Test Coverage:</b><br>• Academic Grammar & Vocabulary<br>• Reading Comprehension<br>• Detailed Answer Keys with Grammatical Analysis."
+        },
         sections: [
             { id: "grammar", name: "Grammar & Vocabulary", type: "standard" },
             { id: "reading", name: "Reading Comprehension", type: "reading" }
         ],
         questions: [
-            // Grammar & Vocab
-            { id: 1, section: "grammar", q: "I ___ to the cinema yesterday.", options: ["go", "gone", "went", "going"], answer: 2, explanation: "Kalimat menggunakan keterangan waktu lampau 'yesterday', sehingga membutuhkan Simple Past Tense (V2 dari go = went)." },
-            { id: 2, section: "grammar", q: "She has been working here ___ five years.", options: ["since", "for", "in", "from"], answer: 1, explanation: "'For' digunakan untuk menunjukkan durasi waktu (lima tahun). 'Since' digunakan untuk titik awal waktu (misal: since 2015)." },
-            { id: 3, section: "grammar", q: "If I ___ a million dollars, I would travel the world.", options: ["have", "will have", "had", "would have"], answer: 2, explanation: "Ini adalah Conditional Type 2 (unreal present). Polanya: If + Simple Past (had), Subject + would + V1." },
-            { id: 4, section: "grammar", q: "The meeting was called ___ because the manager was ill.", options: ["off", "out", "up", "down"], answer: 0, explanation: "Phrasal verb 'call off' bermakna membatalkan (cancel)." },
-            { id: 5, section: "grammar", q: "By the time we arrive at the station, the train ___.", options: ["will leave", "left", "will have left", "has left"], answer: 2, explanation: "Menggunakan Future Perfect Tense (will have + V3) untuk menyatakan kejadian yang sudah selesai di masa depan sebelum kejadian lain terjadi." },
-            
-            // Reading
-            { id: 6, section: "reading", 
-              passageTitle: "The Decline of Bees", 
-              passageText: "<p>In recent years, scientists have observed a significant decline in bee populations worldwide, a phenomenon known as Colony Collapse Disorder (CCD). Bees play a crucial role in pollinating approximately one-third of the human diet, including fruits, vegetables, and nuts. The exact cause of CCD remains highly debated, but researchers believe it is a combination of factors including pesticide use, habitat loss, climate change, and parasitic mites.</p><br><p>Without bees, global food security would be severely compromised, leading to skyrocketing prices for fresh produce and a drastic change in human nutritional intake.</p>",
-              q: "According to the passage, why are bees considered crucial?", 
-              options: ["They produce honey for human consumption.", "They pollinate about a third of human food sources.", "They help control the parasitic mite population.", "They are the only insects affected by climate change."], 
-              answer: 1, 
-              explanation: "Teks secara eksplisit menyatakan: 'Bees play a crucial role in pollinating approximately one-third of the human diet...' (Opsi B)." 
+            {
+                id: 1,
+                section: "grammar",
+                q: "I ___ to the cinema with my close friends yesterday evening.",
+                options: ["go", "gone", "went", "going"],
+                answer: 2,
+                explanation: {
+                    id: "Kalimat menggunakan keterangan waktu lampau 'yesterday evening', sehingga harus memakai Simple Past Tense (Kata kerja bentuk kedua: V2 dari 'go' adalah 'went').",
+                    en: "The sentence uses the past time signal 'yesterday evening', which requires the Simple Past Tense (V2 of 'go' is 'went')."
+                }
             },
-            { id: 7, section: "reading", 
-              passageTitle: "The Decline of Bees", 
-              passageText: "(Refer to previous passage)", // Logic in JS will reuse the text if not provided or same title
-              q: "What is the primary cause of Colony Collapse Disorder (CCD) according to the text?", 
-              options: ["Pesticide use exclusively", "Habitat loss due to urbanization", "Climate change causing global warming", "A combination of multiple factors"], 
-              answer: 3, 
-              explanation: "Teks menyebutkan 'researchers believe it is a combination of factors including pesticide use, habitat loss, climate change, and parasitic mites.' (Opsi D)." 
+            {
+                id: 2,
+                section: "grammar",
+                q: "She has been working as an educator at this institution ___ five years.",
+                options: ["since", "for", "in", "from"],
+                answer: 1,
+                explanation: {
+                    id: "'For' digunakan untuk menunjukkan durasi/jangka waktu (lima tahun). Sementara 'since' digunakan untuk menunjukkan titik awal dimulainya suatu kegiatan.",
+                    en: "'For' is used to denote a duration of time (five years). 'Since' is used to specify a starting point in time."
+                }
+            },
+            {
+                id: 3,
+                section: "grammar",
+                q: "If I ___ a million dollars, I would construct a free public library.",
+                options: ["have", "will have", "had", "would have"],
+                answer: 2,
+                explanation: {
+                    id: "Kalimat ini adalah Conditional Sentence Type 2 (Pengandaian masa kini yang tidak nyata). Rumus: If + Simple Past (had), Subject + would + V1.",
+                    en: "This is a Conditional Sentence Type 2 (unreal present). Formula: If + Simple Past (had), Subject + would + V1."
+                }
+            },
+            {
+                id: 4,
+                section: "grammar",
+                q: "The executive meeting was called ___ because the chief director fell ill.",
+                options: ["off", "out", "up", "down"],
+                answer: 0,
+                explanation: {
+                    id: "Phrasal verb 'call off' bermakna membatalkan (cancel).",
+                    en: "The phrasal verb 'call off' means to cancel."
+                }
+            },
+            {
+                id: 5,
+                section: "grammar",
+                q: "By the time we arrive at the platform, the express train ___.",
+                options: ["will leave", "left", "will have left", "has left"],
+                answer: 2,
+                explanation: {
+                    id: "Future Perfect Tense (will have + V3) digunakan untuk menyatakan peristiwa yang diprediksi sudah selesai di masa depan sebelum kejadian lain terjadi.",
+                    en: "Future Perfect Tense (will have + V3) is used for an action that will be completed before another event in the future."
+                }
+            },
+            {
+                id: 6,
+                section: "reading",
+                passageTitle: "The Essential Role of Pollinators",
+                passageText: "<p>In recent years, agricultural scientists have observed a significant decrease in bee populations worldwide, a phenomenon referred to as Colony Collapse Disorder (CCD). Bees play a crucial role in pollinating approximately one-third of the human food supply, including fruits, vegetables, and nuts. The exact cause of CCD remains under investigation, but researchers point to a combination of pesticide exposure, habitat destruction, climate change, and parasitic infestation.</p><p>Without healthy pollinator populations, global food security faces imminent challenges, leading to increased produce prices and dietary shifts globally.</p>",
+                q: "According to the passage, why are bees considered essential to agriculture?",
+                options: [
+                    "They produce organic honey for commercial export.",
+                    "They pollinate approximately one-third of the human food supply.",
+                    "They eliminate harmful crop parasites naturally.",
+                    "They prevent soil erosion in agricultural areas."
+                ],
+                answer: 1,
+                explanation: {
+                    id: "Teks menyatakan secara langsung: 'Bees play a crucial role in pollinating approximately one-third of the human food supply' (Pilihan B).",
+                    en: "The text explicitly states: 'Bees play a crucial role in pollinating approximately one-third of the human food supply' (Option B)."
+                }
+            },
+            {
+                id: 7,
+                section: "reading",
+                passageTitle: "The Essential Role of Pollinators",
+                passageText: "(Refer to previous passage)",
+                q: "What do researchers believe is responsible for Colony Collapse Disorder (CCD)?",
+                options: [
+                    "Exclusively chemical pesticide usage",
+                    "Rapid global urbanization only",
+                    "A combination of multiple environmental and biological factors",
+                    "A single species of invasive parasitic mite"
+                ],
+                answer: 2,
+                explanation: {
+                    id: "Peneliti menyatakan bahwa CCD disebabkan oleh gabungan beberapa faktor: 'a combination of pesticide exposure, habitat destruction, climate change, and parasitic infestation'.",
+                    en: "Researchers state that CCD is driven by 'a combination of pesticide exposure, habitat destruction, climate change, and parasitic infestation'."
+                }
             }
         ]
     },
     toefl: {
         id: "toefl",
-        title: "TOEFL iBT Simulation",
+        title: "TOEFL iBT Practice Test",
         icon: "fa-globe-americas",
-        timeLimit: 120 * 60, // 2 Jam (Dipersingkat untuk web dari 3 jam)
-        desc: "Simulasi <b>Test of English as a Foreign Language (TOEFL iBT)</b>. Tes ini mengukur kemampuan bahasa Inggris akademik untuk keperluan studi di universitas, terutama di Amerika Utara.<br><br><b>Format Simulasi Ini:</b><br>• Reading (1 Passage, 5 Soal)<br>• Listening (1 Lecture, 5 Soal)<br>• Structure/Written Expression (10 Soal)<br><i>Skala skor dikonversi ke estimasi iBT (0-120).</i>",
+        timeLimit: 45 * 60, // 45 mins
+        desc: {
+            id: "Simulasi ujian <b>TOEFL iBT (Test of English as a Foreign Language)</b> berstandar akademik. Menguji kesiapan bahasa Inggris Anda untuk pendaftaran studi perguruan tinggi di Amerika Serikat, Kanada, dan universitas global.<br><br><b>Fitur Simulasi:</b><br>• Reading Academic Passage<br>• Listening Lecture Audio Synthesis<br>• Structure & Written Expression Analysis<br>• Konversi Estimasi Skor TOEFL iBT (Skala 0 - 120).",
+            en: "Academic <b>TOEFL iBT Simulation</b>. Assesses your readiness for university admission in the US, Canada, and global institutions.<br><br><b>Simulation Features:</b><br>• Academic Reading Passage<br>• Listening Lecture Speech Synthesizer<br>• Structure & Written Expression Analysis<br>• TOEFL iBT Estimated Score Conversion (0 - 120 Scale)."
+        },
         sections: [
-            { id: "reading", name: "Reading", type: "reading" },
-            { id: "listening", name: "Listening", type: "listening" },
-            { id: "structure", name: "Structure", type: "standard" }
+            { id: "reading", name: "Reading Section", type: "reading" },
+            { id: "listening", name: "Listening Section", type: "listening" },
+            { id: "structure", name: "Structure & Written", type: "standard" }
         ],
         questions: [
-            // Reading Section
-            { id: 1, section: "reading", 
-              passageTitle: "Teotihuacán: The City of the Gods", 
-              passageText: "<p>The ancient city of Teotihuacán, located in the Valley of Mexico, was one of the largest and most populated cities in the pre-Columbian Americas. At its zenith in the first half of the first millennium CE, it had an estimated population of 100,000 or more. The city is characterized by its vast monuments, particularly the Pyramid of the Sun and the Pyramid of the Moon, connected by the Avenue of the Dead.</p><p>Unlike other Mesoamerican cities, Teotihuacán contains no royal tombs, and its artwork rarely depicts individual rulers. This has led some archaeologists to propose that the city may have been ruled by a collective governance structure rather than a single autocratic monarch.</p>",
-              q: "The word 'zenith' in the first paragraph is closest in meaning to:", 
-              options: ["beginning", "decline", "peak", "destruction"], 
-              answer: 2, 
-              explanation: "Dalam konteks ini, 'zenith' merujuk pada masa puncak kejayaan atau titik tertinggi (peak) dari kota tersebut." 
+            {
+                id: 1,
+                section: "reading",
+                passageTitle: "Teotihuacán: An Architectural Marvel",
+                passageText: "<p>Located in the Valley of Mexico, the ancient city of Teotihuacán was once one of the largest urban centers in the pre-Columbian Americas. At its zenith during the first millennium CE, the city supported an estimated population exceeding 100,000 residents. The urban layout was defined by monumental architecture, notably the Pyramid of the Sun and the Avenue of the Dead.</p><p>Unlike contemporary Mayan city-states, Teotihuacán exhibits a distinct absence of royal tombs or monuments honoring individual rulers. This has led leading archaeologists to hypothesize that the city operated under a collective governance system rather than an absolute monarchy.</p>",
+                q: "The word 'zenith' in the first paragraph is closest in meaning to:",
+                options: ["origin", "pinnacle", "decline", "foundation"],
+                answer: 1,
+                explanation: {
+                    id: "'Zenith' bermakna titik puncak atau kejayaan tertinggi (pinnacle).",
+                    en: "'Zenith' refers to the highest point or peak of success (pinnacle)."
+                }
             },
-            { id: 2, section: "reading", 
-              passageTitle: "Teotihuacán: The City of the Gods", 
-              q: "What does the author imply about the governance of Teotihuacán?", 
-              options: ["It was firmly controlled by a dynasty of kings.", "It might have been ruled by a group of leaders rather than one king.", "It was heavily influenced by the rulers of the Maya civilization.", "It was a chaotic society with no formal leadership."], 
-              answer: 1, 
-              explanation: "Teks menyebutkan 'city may have been ruled by a collective governance structure rather than a single autocratic monarch', yang berarti kemungkinan diperintah oleh sekelompok pemimpin (collective)." 
+            {
+                id: 2,
+                section: "reading",
+                passageTitle: "Teotihuacán: An Architectural Marvel",
+                passageText: "(Refer to previous passage)",
+                q: "What does the passage suggest regarding the political structure of Teotihuacán?",
+                options: [
+                    "It was strictly ruled by an absolute king.",
+                    "It may have been governed by a council or collective leadership.",
+                    "It was heavily dependent on Mayan military force.",
+                    "It suffered from continuous political anarchy."
+                ],
+                answer: 1,
+                explanation: {
+                    id: "Teks menyebutkan 'hypothesize that the city operated under a collective governance system', yang menunjukkan kepemimpinan kolektif.",
+                    en: "The text notes archaeologists 'hypothesize that the city operated under a collective governance system', indicating shared leadership."
+                }
             },
-            // Listening Section (Mock)
-            { id: 3, section: "listening", 
-              audioTranscript: "[Professor]: 'Today we're going to discuss the concept of Keystone Species in ecology. Now, a keystone species is a plant or animal that plays a unique and crucial role in the way an ecosystem functions. Without keystone species, the ecosystem would be dramatically different or cease to exist altogether. The classic example, discovered by Robert Paine in the 1960s, is the purple sea star in the Pacific Northwest. Paine noticed that when he removed these starfish from the tide pools, the population of mussels—which the starfish usually ate—exploded, crowding out all other species. The biodiversity dropped dramatically.'",
-              audioDuration: 45,
-              q: "What is the main topic of the lecture?", 
-              options: ["The life cycle of the purple sea star.", "The history of ecology in the 1960s.", "The definition and impact of keystone species.", "How to increase biodiversity in tide pools."], 
-              answer: 2, 
-              explanation: "Profesor secara jelas menyatakan di awal: 'Today we're going to discuss the concept of Keystone Species in ecology...'" 
+            {
+                id: 3,
+                section: "listening",
+                audioTranscript: "Welcome class. Today we will examine the biological concept of a Keystone Species. A keystone species is an organism that holds an ecosystem together. If a keystone species were removed, the ecosystem would experience drastic changes or collapse entirely. Consider the purple sea star in tide pools. When biologists removed this sea star, the mussel population grew unchecked, completely monopolizing space and drastically reducing overall marine biodiversity.",
+                q: "What is the primary objective of the biology lecture?",
+                options: [
+                    "To detail the hunting habits of sea stars",
+                    "To explain the significance and ecological impact of keystone species",
+                    "To compare freshwater and marine ecosystems",
+                    "To critique early environmental research methods"
+                ],
+                answer: 1,
+                explanation: {
+                    id: "Profesor menjelaskan definisi dan contoh pentingnya spesies kunci (keystone species) bagi kelangsungan ekosistem.",
+                    en: "The lecturer explains the definition and critical impact of keystone species in preserving ecosystem balance."
+                }
             },
-            { id: 4, section: "listening", 
-              audioTranscript: "Refer to previous",
-              q: "According to the professor, what happened when the purple sea star was removed from the tide pools?", 
-              options: ["The ecosystem flourished with new species.", "The mussel population grew rapidly and reduced biodiversity.", "The starfish adapted to living on land.", "The tide pools dried up completely."], 
-              answer: 1, 
-              explanation: "Audio menyebutkan: 'when he removed these starfish... the population of mussels exploded, crowding out all other species. The biodiversity dropped dramatically.'" 
-            },
-            // Structure
-            { id: 5, section: "structure", q: "Not only ___ generate energy, but it also produces no greenhouse gas emissions.", options: ["wind power does", "does wind power", "wind power", "did wind power"], answer: 1, explanation: "Kalimat yang diawali dengan frasa negatif (Not only) membutuhkan inversi subjek dan kata kerja bantu (does + subject + V1)." },
-            { id: 6, section: "structure", q: "The architecture of the new museum, ___ by a renowned Japanese architect, has won multiple international awards.", options: ["designing", "designed", "was designed", "which designed"], answer: 1, explanation: "Kalimat ini membutuhkan reduced relative clause berbentuk pasif. Bentuk aslinya 'which was designed', disingkat menjadi past participle 'designed'." }
+            {
+                id: 4,
+                section: "structure",
+                q: "Not only ___ cleaner energy, but solar power also reduces reliance on fossil fuels.",
+                options: ["solar technology provides", "does solar technology provide", "provides solar technology", "solar technology does provide"],
+                answer: 1,
+                explanation: {
+                    id: "Inversi terjadi saat kalimat diawali oleh frasa negatif/pembatas seperti 'Not only'. Strukturnya: Not only + Auxiliary Verb (does) + Subject + Main Verb (provide).",
+                    en: "Inversion occurs when a sentence begins with 'Not only'. Structure: Not only + Auxiliary (does) + Subject + Main Verb (provide)."
+                }
+            }
         ]
     },
     ielts: {
         id: "ielts",
-        title: "IELTS Academic",
+        title: "IELTS Academic Practice",
         icon: "fa-globe-europe",
-        timeLimit: 60 * 60, // 60 Menit
-        desc: "Simulasi <b>International English Language Testing System (IELTS)</b> - Academic Module. Dirancang untuk menguji kemampuan bahasa Inggris bagi mereka yang ingin mendaftar ke universitas di UK, Australia, Kanada, dan Selandia Baru.<br><br><b>Format Simulasi Ini:</b><br>• Listening (1 Section, 5 Soal)<br>• Reading (1 Passage, 5 Soal)<br><i>Skor dikalkulasi menggunakan sistem Band (0 - 9.0).</i>",
+        timeLimit: 40 * 60, // 40 mins
+        desc: {
+            id: "Simulasi <b>IELTS Academic (International English Language Testing System)</b>. Dirancang untuk pendaftaran studi di Britania Raya, Australia, Selandia Baru, dan Eropa.<br><br><b>Format Simulasi:</b><br>• Academic Reading (True / False / Not Given & Multiple Choice)<br>• Audio Listening Comprehension<br>• Kalkulasi Skor IELTS Band (Skala Band 1.0 - 9.0).",
+            en: "Simulated <b>IELTS Academic</b> assessment for higher education in the UK, Australia, New Zealand, and Europe.<br><br><b>Simulation Features:</b><br>• Academic Reading (True / False / Not Given)<br>• Audio Listening Comprehension<br>• IELTS Band Score Calculation (1.0 - 9.0 Band Scale)."
+        },
         sections: [
-            { id: "listening", name: "Listening Section 1", type: "listening" },
-            { id: "reading", name: "Reading Passage 1", type: "reading" }
+            { id: "listening", name: "Listening Section", type: "listening" },
+            { id: "reading", name: "Reading Passage", type: "reading" }
         ],
         questions: [
-            // Listening
-            { id: 1, section: "listening", 
-              audioTranscript: "[Agent]: 'Good morning, City Tours. How can I help you?'
-[Tourist]: 'Hello, I'd like to book a walking tour for this Saturday.'
-[Agent]: 'Certainly. We have two tours available on Saturday. The Historical Centre Tour starts at 9:30 AM, and the Culinary Tour begins at 1:00 PM. Which one would you prefer?'
-[Tourist]: 'The food one sounds great, but my flight arrives at noon, so I might miss it. I'll take the morning one instead, assuming I can change my flight.'
-[Agent]: 'Alright, the Historical Centre Tour at 9:30. That will be £25 per person.'",
-              audioDuration: 35,
-              q: "Which tour does the tourist decide to book?", 
-              options: ["The 1:00 PM Culinary Tour", "The 9:30 AM Historical Centre Tour", "Both tours", "Neither tour"], 
-              answer: 1, 
-              explanation: "Meskipun awalnya tertarik pada Culinary Tour, turis tersebut mengatakan 'I'll take the morning one instead' (Historical Centre Tour jam 9:30)." 
+            {
+                id: 1,
+                section: "listening",
+                audioTranscript: "Good day, City Tourism Bureau. I am calling to inquire about the heritage walking tour scheduled for Saturday. We offer two guided slots: the Morning Architectural Tour at 9:30 AM and the Afternoon Culinary Tour at 2:00 PM. The morning tour costs 20 pounds per participant and covers historical monuments.",
+                q: "What time does the Morning Architectural Tour begin?",
+                options: ["9:00 AM", "9:30 AM", "2:00 PM", "10:00 AM"],
+                answer: 1,
+                explanation: {
+                    id: "Transkrip audio menyebutkan: 'Morning Architectural Tour at 9:30 AM' (Pilihan B).",
+                    en: "The transcript explicitly states: 'Morning Architectural Tour at 9:30 AM' (Option B)."
+                }
             },
-            { id: 2, section: "listening", 
-              audioTranscript: "Refer to previous",
-              q: "Why did the tourist reject the Culinary Tour?", 
-              options: ["It was too expensive.", "He doesn't like local food.", "His flight arrival time conflicts with the tour start time.", "It was fully booked."], 
-              answer: 2, 
-              explanation: "Turis mengatakan 'my flight arrives at noon, so I might miss it' (Culinary tour jam 1:00 PM)." 
+            {
+                id: 2,
+                section: "reading",
+                passageTitle: "Vertical Agriculture Innovations",
+                passageText: "<p>As global urban populations expand, traditional agricultural land experiences severe strains. Urban vertical farming—growing crops in stacked indoor layers under controlled climates—presents an alternative solution. Controlled environment farming reduces water usage by up to 95% compared to conventional soil farming and eliminates the necessity for chemical insecticides.</p><p>However, environmental analysts point out that vertical farms require substantial electrical energy to power artificial LED illumination, resulting in a notable carbon footprint unless powered by renewable energy sources.</p>",
+                q: "Statement: Vertical farming utilizes significantly more water than conventional soil farming.",
+                options: [
+                    "TRUE (Statement agrees with information)",
+                    "FALSE (Statement contradicts information)",
+                    "NOT GIVEN (No information on this in text)"
+                ],
+                answer: 1,
+                explanation: {
+                    id: "Teks menyatakan vertical farming menghemat air hingga 95% ('reduces water usage by up to 95%'). Maka pernyataan 'utilizes significantly more water' adalah FALSE.",
+                    en: "The text states vertical farming reduces water usage by up to 95%. Therefore, the statement is FALSE."
+                }
             },
-            // Reading (T/F/NG Format mapped to Multiple Choice for web)
-            { id: 3, section: "reading", 
-              passageTitle: "The Future of Urban Farming", 
-              passageText: "<p>As global populations soar, traditional agriculture is facing unprecedented pressure. Urban farming—the practice of cultivating, processing, and distributing food in or around urban areas—is emerging as a viable solution. Vertical farming, a subset of urban farming, involves growing crops in stacked layers in highly controlled indoor environments.</p><p>Proponents argue that vertical farming uses up to 95% less water than conventional farming and eliminates the need for chemical pesticides due to the enclosed environment. However, critics point out that the energy consumption required for artificial lighting (LEDs) and climate control makes the carbon footprint of vertical farms significantly higher than traditional farms, at least until renewable energy becomes the primary power source.</p>",
-              q: "Vertical farming requires more water than conventional agriculture.", 
-              options: ["TRUE (Statement agrees with information)", "FALSE (Statement contradicts information)", "NOT GIVEN (No information on this)"], 
-              answer: 1, 
-              explanation: "Teks menyatakan: 'vertical farming uses up to 95% less water than conventional farming'. Pernyataan di soal berkontradiksi (FALSE)." 
-            },
-            { id: 4, section: "reading", 
-              passageTitle: "The Future of Urban Farming",
-              q: "Pesticides are frequently used in vertical farming to protect crops.", 
-              options: ["TRUE", "FALSE", "NOT GIVEN"], 
-              answer: 1, 
-              explanation: "Teks menyatakan: 'eliminates the need for chemical pesticides due to the enclosed environment'. Jadi pernyataan salah (FALSE)." 
-            },
-            { id: 5, section: "reading", 
-              passageTitle: "The Future of Urban Farming",
-              q: "Most vertical farms currently use solar panels to power their LED lights.", 
-              options: ["TRUE", "FALSE", "NOT GIVEN"], 
-              answer: 2, 
-              explanation: "Teks menyebutkan 'until renewable energy becomes the primary power source', tetapi tidak menyebutkan secara spesifik bahwa sebagian besar lahan pertanian vertikal saat ini menggunakan 'solar panels' (NOT GIVEN)." 
+            {
+                id: 3,
+                section: "reading",
+                passageTitle: "Vertical Agriculture Innovations",
+                passageText: "(Refer to previous passage)",
+                q: "Statement: Vertical indoor farms completely eliminate the need for chemical insecticides.",
+                options: [
+                    "TRUE (Statement agrees with information)",
+                    "FALSE (Statement contradicts information)",
+                    "NOT GIVEN (No information on this in text)"
+                ],
+                answer: 0,
+                explanation: {
+                    id: "Teks menyatakan: 'eliminates the necessity for chemical insecticides'. Pernyataan ini berkesesuaian (TRUE).",
+                    en: "The text notes: 'eliminates the necessity for chemical insecticides'. This matches the statement (TRUE)."
+                }
             }
         ]
     }

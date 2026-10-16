@@ -1,6 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-    <!-- Blue circle background -->
-    <circle cx="256" cy="256" r="256" fill="#2563eb" />
-    <!-- White graduation cap / book representation -->
+    <defs>
+        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+    <circle cx="256" cy="256" r="256" fill="url(#grad)" />
     <path fill="#ffffff" d="M256 128l-128 72 128 72 128-72-128-72zm0 180l-96-54v70c0 14 10.3 32 30.6 44.5 19.5 12 43.1 19.5 65.4 19.5s45.9-7.5 65.4-19.5c20.3-12.5 30.6-30.5 30.6-44.5v-70l-96 54z"/>
 </svg>
